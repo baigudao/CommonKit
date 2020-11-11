@@ -1,4 +1,4 @@
-package com.devin.commonkit
+package com.common.main
 
 import android.content.Context
 import android.widget.Toast
