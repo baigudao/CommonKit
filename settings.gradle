@@ -1,2 +1,2 @@
-include ':app', ':libs_main'
+include ':app', ':libs_main', ':libs_util'
 rootProject.name='CommonKit'
