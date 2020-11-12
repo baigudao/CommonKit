@@ -2,10 +2,10 @@ package com.common.main.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.IdRes
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxFragment
 import io.reactivex.Observable

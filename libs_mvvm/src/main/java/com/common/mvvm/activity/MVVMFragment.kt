@@ -1,14 +1,14 @@
 package com.common.mvvm.activity
 
+import android.arch.lifecycle.ViewModelProvider
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
+import com.common.main.activity.BaseFragment
 import com.common.mvvm.vm.SuperViewModelProvider
-import com.ssf.framework.main.activity.BaseFragment
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 

@@ -1,8 +1,8 @@
 package com.common.widget.banner.transformer;
 
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import androidx.viewpager.widget.ViewPager;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com

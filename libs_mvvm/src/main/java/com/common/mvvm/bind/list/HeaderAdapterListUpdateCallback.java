@@ -1,8 +1,8 @@
 package com.common.mvvm.bind.list;
 
 
-import androidx.recyclerview.widget.ListUpdateCallback;
-import androidx.recyclerview.widget.RecyclerView;
+import android.support.v7.util.ListUpdateCallback;
+import android.support.v7.widget.RecyclerView;
 
 import com.common.mvvm.adapter.BaseBindingAdapter;
 

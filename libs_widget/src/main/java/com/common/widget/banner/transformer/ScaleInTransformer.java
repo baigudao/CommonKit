@@ -2,9 +2,9 @@ package com.common.widget.banner.transformer;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import androidx.viewpager.widget.ViewPager;
 
 public class ScaleInTransformer extends BasePageTransformer {
     private static final float DEFAULT_MIN_SCALE = 0.85f;

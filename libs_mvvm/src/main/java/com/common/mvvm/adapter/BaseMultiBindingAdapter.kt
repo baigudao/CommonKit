@@ -1,7 +1,7 @@
 package com.common.mvvm.adapter
 
 import android.content.Context
-import androidx.databinding.ViewDataBinding
+import android.databinding.ViewDataBinding
 
 /**
  * 多布局适配器

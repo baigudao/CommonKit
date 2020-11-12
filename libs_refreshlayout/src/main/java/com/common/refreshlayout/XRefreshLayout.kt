@@ -1,10 +1,10 @@
 package com.common.refreshlayout
 
 import android.content.Context
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.Button
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.common.log.KLog
 import com.common.net.ex.convert
 import com.common.widget.state.IStateLayout

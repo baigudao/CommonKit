@@ -1,7 +1,7 @@
 package com.common.mvvm.bind.list;
 
 
-import androidx.recyclerview.widget.DiffUtil;
+import android.support.v7.util.DiffUtil;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.common.glide.ex
 
 import android.content.Context
+import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import com.bumptech.glide.request.RequestOptions
 import com.common.glide.GlideLoader
 import com.common.glide.interfac.IGlideType

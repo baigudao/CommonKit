@@ -1,8 +1,8 @@
 package com.common.widget.banner.transformer;
 
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 
-import androidx.core.view.ViewCompat;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com

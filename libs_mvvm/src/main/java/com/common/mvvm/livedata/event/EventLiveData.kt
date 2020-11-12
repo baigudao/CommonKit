@@ -1,8 +1,8 @@
 package com.common.mvvm.livedata.event
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 
@@ -29,11 +29,11 @@ open class EventLiveData<T> : SubscribeLiveData<Event<T>>() {
     /**
      * 不能直接创建监听，需要通过ObserverEvent方法
      */
-    override fun observe(owner: LifecycleOwner, observer: Observer<in Event<T>>) {
+    override fun observe(owner: LifecycleOwner, observer: Observer<Event<T>>) {
         throw IllegalAccessException("can not access this function,please use ObserverEvent")
     }
 
-    override fun observeForever(observer: Observer<in Event<T>>) {
+    override fun observeForever(observer: Observer<Event<T>>) {
         throw IllegalAccessException("can not access this function,please use observeEventForever")
     }
 

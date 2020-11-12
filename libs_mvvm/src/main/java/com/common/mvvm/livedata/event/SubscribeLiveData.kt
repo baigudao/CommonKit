@@ -1,8 +1,8 @@
 package com.common.mvvm.livedata.event
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
 
 
 /**
@@ -22,7 +22,7 @@ import androidx.lifecycle.Observer
  */
 open class SubscribeLiveData<T> : LiveData<T>() {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
+    override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
         super.observe(owner, observer)
         hook(observer)
     }
@@ -63,7 +63,7 @@ open class SubscribeLiveData<T> : LiveData<T>() {
     }
 
     //observeForever源码分析不能按照observe方式去处理，处理方法时查询调用栈，如果是observeForever发起的就不执行
-    override fun observeForever(observer: Observer<in T>) {
+    override fun observeForever(observer: Observer<T>) {
         super.observeForever(ObserverWrapper(observer))
     }
 

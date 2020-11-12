@@ -1,8 +1,8 @@
 package com.common.refreshlayout.adapter
 
+import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.common.autolayout.utils.AutoUtils
 
 

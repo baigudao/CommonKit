@@ -3,7 +3,6 @@ package com.common.log;
 
 import android.text.TextUtils;
 
-
 import androidx.annotation.Nullable;
 
 import com.common.log.klog.BaseLog;

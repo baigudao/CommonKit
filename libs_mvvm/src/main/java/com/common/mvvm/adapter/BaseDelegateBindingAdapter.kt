@@ -1,8 +1,8 @@
 package com.common.mvvm.adapter
 
 import android.content.Context
+import android.databinding.ViewDataBinding
 import android.view.View
-import androidx.databinding.ViewDataBinding
 import com.common.mvvm.adapter.delegate.ProviderDelegate
 
 /**

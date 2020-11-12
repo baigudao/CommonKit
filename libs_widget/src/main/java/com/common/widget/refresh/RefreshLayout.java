@@ -1,6 +1,8 @@
 package com.common.widget.refresh;
 
 import android.content.Context;
+import android.support.v4.view.MotionEventCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -11,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Scroller;
 
-import androidx.core.view.MotionEventCompat;
-import androidx.core.view.ViewCompat;
 
 /**
  * Created by AItsuki on 2016/6/13.

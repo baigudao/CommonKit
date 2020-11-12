@@ -1,13 +1,12 @@
 package com.common.mvvm.bind.list;
 
 
+import android.databinding.BindingAdapter;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
+import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.common.mvvm.adapter.BaseBindingAdapter;
 import com.common.refreshlayout.XRefreshLayout;

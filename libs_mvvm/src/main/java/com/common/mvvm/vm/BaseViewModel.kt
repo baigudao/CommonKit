@@ -1,7 +1,7 @@
 package com.common.mvvm.vm
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.arch.lifecycle.AndroidViewModel
 import com.common.mvvm.lifecycle.RxLifecycleViewModel
 import com.common.mvvm.lifecycle.ViewModelEvent
 import com.common.mvvm.livedata.*

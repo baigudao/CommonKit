@@ -1,7 +1,7 @@
 package com.common.mvvm.livedata
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.Observer
 import com.common.mvvm.livedata.ErrorLiveData.Error
 import com.common.mvvm.livedata.event.EventLiveData
 

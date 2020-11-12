@@ -1,7 +1,7 @@
 package com.common.mvvm.ob
 
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
+import android.arch.lifecycle.Observer
+import android.support.v4.app.FragmentActivity
 import com.common.mvvm.livedata.ToastLiveData
 import com.common.widget.ex.IToast
 import com.common.widget.ex.toast

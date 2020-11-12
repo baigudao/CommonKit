@@ -1,10 +1,9 @@
 package com.common.mvvm.bind;
 
 
+import android.databinding.BindingAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.databinding.BindingAdapter;
 
 import com.common.autolayout.utils.AutoUtils;
 

@@ -1,7 +1,7 @@
 package com.common.mvvm.bind.state;
 
 
-import androidx.databinding.BindingAdapter;
+import android.databinding.BindingAdapter;
 
 import com.common.refreshlayout.XRefreshLayout;
 import com.common.widget.state.IStateLayout;

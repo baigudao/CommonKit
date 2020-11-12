@@ -4,8 +4,8 @@ import android.app.Activity
 import android.app.Dialog
 import android.app.DialogFragment
 import android.app.Fragment
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.common.main.activity.BaseFragment
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty

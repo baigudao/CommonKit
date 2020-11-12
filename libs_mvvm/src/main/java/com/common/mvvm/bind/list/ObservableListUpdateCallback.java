@@ -1,7 +1,7 @@
 package com.common.mvvm.bind.list;
 
 
-import androidx.databinding.ObservableList;
+import android.databinding.ObservableList;
 
 import com.common.mvvm.adapter.BaseBindingAdapter;
 

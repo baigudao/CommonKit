@@ -1,10 +1,10 @@
 package com.common.mvvm.vm
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import com.common.mvvm.ob.DefaultActivityObserver
 import com.common.mvvm.ob.DefaultErrorObserver
 import com.common.mvvm.ob.DefaultProgressObserver

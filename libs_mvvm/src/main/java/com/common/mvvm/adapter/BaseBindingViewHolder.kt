@@ -1,8 +1,8 @@
 package com.common.mvvm.adapter
 
-import androidx.annotation.IdRes
-import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView
+import android.databinding.ViewDataBinding
+import android.support.annotation.IdRes
+import android.support.v7.widget.RecyclerView
 import java.util.*
 
 /**
