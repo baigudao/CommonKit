@@ -1,12 +1,12 @@
-package com.ssf.framework.main.ex
+package com.common.main.ex
 
 import android.app.Activity
 import android.app.Dialog
 import android.app.DialogFragment
 import android.app.Fragment
-import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
-import com.ssf.framework.main.activity.BaseFragment
+import androidx.recyclerview.widget.RecyclerView
+import com.common.main.activity.BaseFragment
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import android.support.v4.app.DialogFragment as SupportDialogFragment
@@ -36,8 +36,8 @@ public fun <V : View> BaseFragment.bindView(id: Int)
 public fun <V : View> SupportFragment.bindView(id: Int)
         : ReadOnlyProperty<SupportFragment, V> = required(id, viewFinder)
 
-public fun <V : View> ViewHolder.bindView(id: Int)
-        : ReadOnlyProperty<ViewHolder, V> = required(id, viewFinder)
+public fun <V : View> RecyclerView.ViewHolder.bindView(id: Int)
+        : ReadOnlyProperty<RecyclerView.ViewHolder, V> = required(id, viewFinder)
 
 public fun <V : View> View.bindOptionalView(id: Int)
         : ReadOnlyProperty<View, V?> = optional(id, viewFinder)
@@ -60,8 +60,8 @@ public fun <V : View> Fragment.bindOptionalView(id: Int)
 public fun <V : View> SupportFragment.bindOptionalView(id: Int)
         : ReadOnlyProperty<SupportFragment, V?> = optional(id, viewFinder)
 
-public fun <V : View> ViewHolder.bindOptionalView(id: Int)
-        : ReadOnlyProperty<ViewHolder, V?> = optional(id, viewFinder)
+public fun <V : View> RecyclerView.ViewHolder.bindOptionalView(id: Int)
+        : ReadOnlyProperty<RecyclerView.ViewHolder, V?> = optional(id, viewFinder)
 
 public fun <V : View> View.bindViews(vararg ids: Int)
         : ReadOnlyProperty<View, List<V>> = required(ids, viewFinder)
@@ -84,8 +84,8 @@ public fun <V : View> Fragment.bindViews(vararg ids: Int)
 public fun <V : View> SupportFragment.bindViews(vararg ids: Int)
         : ReadOnlyProperty<SupportFragment, List<V>> = required(ids, viewFinder)
 
-public fun <V : View> ViewHolder.bindViews(vararg ids: Int)
-        : ReadOnlyProperty<ViewHolder, List<V>> = required(ids, viewFinder)
+public fun <V : View> RecyclerView.ViewHolder.bindViews(vararg ids: Int)
+        : ReadOnlyProperty<RecyclerView.ViewHolder, List<V>> = required(ids, viewFinder)
 
 public fun <V : View> View.bindOptionalViews(vararg ids: Int)
         : ReadOnlyProperty<View, List<V>> = optional(ids, viewFinder)
@@ -108,8 +108,8 @@ public fun <V : View> Fragment.bindOptionalViews(vararg ids: Int)
 public fun <V : View> SupportFragment.bindOptionalViews(vararg ids: Int)
         : ReadOnlyProperty<SupportFragment, List<V>> = optional(ids, viewFinder)
 
-public fun <V : View> ViewHolder.bindOptionalViews(vararg ids: Int)
-        : ReadOnlyProperty<ViewHolder, List<V>> = optional(ids, viewFinder)
+public fun <V : View> RecyclerView.ViewHolder.bindOptionalViews(vararg ids: Int)
+        : ReadOnlyProperty<RecyclerView.ViewHolder, List<V>> = optional(ids, viewFinder)
 
 private val View.viewFinder: View.(Int) -> View?
     get() = { findViewById(it) }
@@ -122,16 +122,16 @@ private val DialogFragment.viewFinder: DialogFragment.(Int) -> View?
 private val SupportDialogFragment.viewFinder: SupportDialogFragment.(Int) -> View?
     get() = { dialog?.findViewById(it) ?: view?.findViewById(it) }
 private val Fragment.viewFinder: Fragment.(Int) -> View?
-    get() = { view.findViewById(it) }
+    get() = { view?.findViewById(it) }
 private val SupportFragment.viewFinder: SupportFragment.(Int) -> View?
     get() = { view!!.findViewById(it) }
-private val ViewHolder.viewFinder: ViewHolder.(Int) -> View?
+private val RecyclerView.ViewHolder.viewFinder: RecyclerView.ViewHolder.(Int) -> View?
     get() = { itemView.findViewById(it) }
 private val BaseFragment.viewFinder: BaseFragment.(Int) -> View
     get() = { mInflate!!.findViewById(it) }
 
 private fun viewNotFound(id: Int, desc: KProperty<*>): Nothing =
-        throw IllegalStateException("View ID $id for '${desc.name}' not found.")
+    throw IllegalStateException("View ID $id for '${desc.name}' not found.")
 
 @Suppress("UNCHECKED_CAST")
 private fun <T, V : View> required(id: Int, finder: T.(Int) -> View?) = Lazy { t: T, desc ->
@@ -139,7 +139,8 @@ private fun <T, V : View> required(id: Int, finder: T.(Int) -> View?) = Lazy { t
 }
 
 @Suppress("UNCHECKED_CAST")
-private fun <T, V : View> optional(id: Int, finder: T.(Int) -> View?) = Lazy { t: T, desc -> t.finder(id) as V? }
+private fun <T, V : View> optional(id: Int, finder: T.(Int) -> View?) =
+    Lazy { t: T, desc -> t.finder(id) as V? }
 
 @Suppress("UNCHECKED_CAST")
 private fun <T, V : View> required(ids: IntArray, finder: T.(Int) -> View?) = Lazy { t: T, desc ->
@@ -149,7 +150,8 @@ private fun <T, V : View> required(ids: IntArray, finder: T.(Int) -> View?) = La
 }
 
 @Suppress("UNCHECKED_CAST")
-private fun <T, V : View> optional(ids: IntArray, finder: T.(Int) -> View?) = Lazy { t: T, desc -> ids.map { t.finder(it) as V? }.filterNotNull() }
+private fun <T, V : View> optional(ids: IntArray, finder: T.(Int) -> View?) =
+    Lazy { t: T, desc -> ids.map { t.finder(it) as V? }.filterNotNull() }
 
 // Like Kotlin's lazy delegate but the initializer gets the target and metadata passed to it
 private class Lazy<T, V>(private val initializer: (T, KProperty<*>) -> V) : ReadOnlyProperty<T, V> {

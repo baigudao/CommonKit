@@ -37,11 +37,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.3.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation lib.SupportV7
     implementation lib.SupportRecyclerviewV7
@@ -56,8 +51,19 @@ dependencies {
     // dagger
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
     //main
     implementation project(':libs_main')
+    implementation project(':libs_widget')
+    implementation project(':libs_util')
+    implementation project(':libs_umeng')
+    implementation project(':libs_tinker')
+    implementation project(':libs_refreshlayout')
+    implementation project(':libs_net')
+    implementation project(':libs_social')
+    implementation project(':libs_log')
+    implementation project(':libs_glide')
+    implementation project(':libs_autolayout')
 
     /*implementation "com.ssf.framework:main:$config.framework_main_version"
     implementation "com.ssf.framework:autolayout:$config.framework_autolayout_version"

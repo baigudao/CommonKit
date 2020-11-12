@@ -1,6 +1,6 @@
-package com.ssf.framework.net.transformer
+package com.common.net.transformer
 
-import com.ssf.framework.net.common.RetryWhenNetwork
+import com.common.net.common.RetryWhenNetwork
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
@@ -15,16 +15,16 @@ import io.reactivex.schedulers.Schedulers
 class ApplySchedulers<T>(private val retry: Boolean = true) : ObservableTransformer<T, T> {
     override fun apply(upstream: Observable<T>): ObservableSource<T> = if (retry) {
         upstream
-                // .delay(5, TimeUnit.SECONDS)     //请求延迟五秒，再开始
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread(), true)
-                .retryWhen(RetryWhenNetwork())
+            // .delay(5, TimeUnit.SECONDS)     //请求延迟五秒，再开始
+            .subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread(), true)
+            .retryWhen(RetryWhenNetwork())
     } else {
         upstream
-                // .delay(5, TimeUnit.SECONDS)     //请求延迟五秒，再开始
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread(), true)
+            // .delay(5, TimeUnit.SECONDS)     //请求延迟五秒，再开始
+            .subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread(), true)
     }
 }

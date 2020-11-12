@@ -1,8 +1,9 @@
 package com.common.widget.other;
 
 import android.content.Context;
-import android.support.v4.app.FragmentTabHost;
 import android.util.AttributeSet;
+
+import androidx.fragment.app.FragmentTabHost;
 
 /**
  * @author robert

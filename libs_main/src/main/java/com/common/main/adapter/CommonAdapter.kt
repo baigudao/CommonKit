@@ -1,12 +1,12 @@
-package com.ssf.framework.main.adapter
+package com.common.main.adapter
 
-import android.support.annotation.LayoutRes
-import android.support.annotation.NonNull
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.annotation.NonNull
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * @author 小民
@@ -14,13 +14,16 @@ import android.view.ViewGroup
  */
 
 abstract class CommonAdapter<T>(
-        /* 绑定数据 */
-        @LayoutRes private val layoutID: Int, /* Data */
-        @NonNull var data: ArrayList<T>) : RecyclerView.Adapter<BaseViewHolder>() {
+    /* 绑定数据 */
+    @LayoutRes private val layoutID: Int, /* Data */
+    @NonNull var data: ArrayList<T>
+) : RecyclerView.Adapter<BaseViewHolder>() {
     /* 监听列表 id */
     private val mClickIDs = ArrayList<Int>()
+
     /* 简单功能监听 */
     private var mSimpleItemClickListener: OnSimpleItemClickListener? = null
+
     /* 多功能监听 */
     private var mItemClickListener: OnItemClickListener<T>? = null
 
@@ -123,7 +126,10 @@ abstract class CommonAdapter<T>(
     }
 
     /* 设置监听事件 */
-    fun setOnSimpleItemClickListener(onSimpleItemClickListener: OnSimpleItemClickListener, vararg viewIds: Int) {
+    fun setOnSimpleItemClickListener(
+        onSimpleItemClickListener: OnSimpleItemClickListener,
+        vararg viewIds: Int
+    ) {
         viewIds.forEach { mClickIDs.add(it) }
         mSimpleItemClickListener = onSimpleItemClickListener
     }

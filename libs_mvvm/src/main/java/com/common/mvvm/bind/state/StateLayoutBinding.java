@@ -1,10 +1,11 @@
 package com.common.mvvm.bind.state;
 
-import android.databinding.BindingAdapter;
 
-import com.ssf.framework.refreshlayout.XRefreshLayout;
-import com.ssf.framework.widget.state.IStateLayout;
-import com.ssf.framework.widget.state.StateFrameLayout;
+import androidx.databinding.BindingAdapter;
+
+import com.common.refreshlayout.XRefreshLayout;
+import com.common.widget.state.IStateLayout;
+import com.common.widget.state.StateFrameLayout;
 
 /**
  * 状态布局的绑定适配
@@ -13,6 +14,7 @@ import com.ssf.framework.widget.state.StateFrameLayout;
 public class StateLayoutBinding {
     /**
      * 实际上XRefresh控件自己本身已经实现了状态的管理，可以不用处理
+     *
      * @param refreshLayout
      * @param state
      */

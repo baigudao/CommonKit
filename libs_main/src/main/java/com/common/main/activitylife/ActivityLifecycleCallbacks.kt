@@ -1,9 +1,9 @@
-package com.ssf.framework.main.activitylife
+package com.common.main.activitylife
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import java.util.*
+
 
 class ActivityLifecycleCallbacks : Application.ActivityLifecycleCallbacks, ActivityState {
 
@@ -40,7 +40,7 @@ class ActivityLifecycleCallbacks : Application.ActivityLifecycleCallbacks, Activ
         resumeActivity.remove(activity)
     }
 
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
     override fun onActivityDestroyed(activity: Activity) {
         activityList.remove(activity)

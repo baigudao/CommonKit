@@ -1,9 +1,8 @@
-package com.ssf.framework.net.interceptor
+package com.common.net.interceptor
 
-import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.util.HashMap
+import java.util.*
 
 
 /**

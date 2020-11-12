@@ -20,13 +20,13 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.common.tinker.crash.SampleUncaughtExceptionHandler;
+import com.common.tinker.util.Utils;
 import com.tencent.tinker.lib.listener.DefaultPatchListener;
 import com.tencent.tinker.lib.util.TinkerLog;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.tencent.tinker.loader.shareutil.SharePatchFileUtil;
 import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
-import com.xm.updates.tinker.crash.SampleUncaughtExceptionHandler;
-import com.xm.updates.tinker.util.Utils;
 
 import java.io.File;
 import java.util.Properties;

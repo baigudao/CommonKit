@@ -1,18 +1,19 @@
 package com.common.main.adapter;
 
-import android.support.v7.widget.RecyclerView;
+
 import android.util.SparseArray;
 import android.view.View;
 
-import com.ssf.framework.autolayout.utils.AutoUtils;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.common.autolayout.utils.AutoUtils;
 
 /**
  * @author 小民
  * @time 2017/7/15
  */
 public class BaseViewHolder extends RecyclerView.ViewHolder {
-    private SparseArray<View> views  = new SparseArray<>();
+    private SparseArray<View> views = new SparseArray<>();
 
     public BaseViewHolder(View itemView) {
         super(itemView);

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.View;
 
-import com.ssf.framework.main.swipebacklayout.SwipeBackLayout;
+import com.common.main.swipebacklayout.SwipeBackLayout;
 
 
 public class SwipeBackPreferenceActivity extends PreferenceActivity implements SwipeBackActivityBase {
@@ -31,11 +31,12 @@ public class SwipeBackPreferenceActivity extends PreferenceActivity implements S
             return mHelper.findViewById(id);
         return v;
     }
-    
+
     @Override
     public SwipeBackLayout getSwipeBackLayout() {
         return mHelper.getSwipeBackLayout();
     }
+
     @Override
     public void setSwipeBackEnable(boolean enable) {
         getSwipeBackLayout().setEnableGesture(enable);

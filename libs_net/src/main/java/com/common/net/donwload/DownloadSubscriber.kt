@@ -1,10 +1,10 @@
-package com.ssf.framework.net.donwload
+package com.common.net.donwload
 
 import android.content.Context
-import com.ssf.framework.net.donwload.cache.DownInfoDbUtil
-import com.ssf.framework.net.donwload.interfac.DownState
-import com.ssf.framework.net.donwload.interfac.IDownloadFinished
-import com.xm.xlog.KLog
+import com.common.log.KLog
+import com.common.net.donwload.cache.DownInfoDbUtil
+import com.common.net.donwload.interfac.DownState
+import com.common.net.donwload.interfac.IDownloadFinished
 import io.reactivex.Observer
 import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
@@ -16,9 +16,9 @@ import io.reactivex.disposables.Disposable
  */
 
 class DownloadSubscriber<T>(
-        private val context: Context,
-        private val downloadUrl: String,
-        private val finished: IDownloadFinished
+    private val context: Context,
+    private val downloadUrl: String,
+    private val finished: IDownloadFinished
 ) : Observer<T> {
     //用于关闭上下流
     private var disposable: Disposable? = null
@@ -29,7 +29,7 @@ class DownloadSubscriber<T>(
     }
 
     override fun onNext(@NonNull t: T) {
-        KLog.e( "DownloadSubscriber -> onNext")
+        KLog.e("DownloadSubscriber -> onNext")
     }
 
     override fun onError(@NonNull e: Throwable) {

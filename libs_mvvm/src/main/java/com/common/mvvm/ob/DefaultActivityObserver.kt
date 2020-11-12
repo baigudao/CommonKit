@@ -1,8 +1,8 @@
 package com.common.mvvm.ob
 
-import android.arch.lifecycle.Observer
-import android.support.v4.app.FragmentActivity
-import com.ssf.framework.main.mvvm.livedata.ActivityLiveData
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import com.common.mvvm.livedata.ActivityLiveData
 
 /**
  * Created by hzz on 2018/8/18.

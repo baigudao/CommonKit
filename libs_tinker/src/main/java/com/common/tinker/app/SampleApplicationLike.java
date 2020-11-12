@@ -21,43 +21,43 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.multidex.MultiDex;
 
+import androidx.multidex.MultiDex;
+
+import com.common.tinker.Log.MyLogImp;
+import com.common.tinker.util.SampleApplicationContext;
+import com.common.tinker.util.TinkerManager;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
-import com.tencent.tinker.loader.app.ApplicationLifeCycle;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
-import com.xm.updates.tinker.Log.MyLogImp;
-import com.xm.updates.tinker.util.SampleApplicationContext;
-import com.xm.updates.tinker.util.TinkerManager;
 
 /**
  * because you can not use any other class in your application, we need to
  * move your implement of Application to {@link ApplicationLifeCycle}
  * As Application, all its direct reference class should be in the main dex.
- *
+ * <p>
  * We use tinker-android-anno to make sure all your classes can be patched.
- *
+ * <p>
  * application: if it is start with '.', we will add SampleApplicationLifeCycle's package name
- *
+ * <p>
  * flags:
  * TINKER_ENABLE_ALL: support dex, lib and resource
  * TINKER_DEX_MASK: just support dex
  * TINKER_NATIVE_LIBRARY_MASK: just support lib
  * TINKER_RESOURCE_MASK: just support resource
- *
+ * <p>
  * loaderClass: define the tinker loader class, we can just use the default TinkerLoader
- *
+ * <p>
  * loadVerifyFlag: whether check files' md5 on the load time, defualt it is false.
- *
+ * <p>
  * Created by zhangshaowen on 16/3/17.
  */
 @SuppressWarnings("unused")
 @DefaultLifeCycle(application = "com.xm.updates.tinker.app.SampleApplication",
-                  flags = ShareConstants.TINKER_ENABLE_ALL,
-                  loadVerifyFlag = false)
+        flags = ShareConstants.TINKER_ENABLE_ALL,
+        loadVerifyFlag = false)
 public class SampleApplicationLike extends DefaultApplicationLike {
     private static final String TAG = "Tinker.SampleApplicationLike";
 

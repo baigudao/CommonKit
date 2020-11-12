@@ -1,13 +1,17 @@
 package com.common.mvvm.adapter
 
 import android.content.Context
-import android.databinding.ViewDataBinding
+import androidx.databinding.ViewDataBinding
 
 /**
  * 多布局适配器
  * Created by Hzz on 2018/9/28
  */
-abstract class BaseMultiBindingAdapter<T>(context: Context, list: ArrayList<T> = ArrayList(), itemClickListener: OnItemClickListener<T>? = null) : BaseBindingAdapter<T, ViewDataBinding>(context, 0, list, itemClickListener) {
+abstract class BaseMultiBindingAdapter<T>(
+    context: Context,
+    list: ArrayList<T> = ArrayList(),
+    itemClickListener: OnItemClickListener<T>? = null
+) : BaseBindingAdapter<T, ViewDataBinding>(context, 0, list, itemClickListener) {
 
     constructor(context: Context) : this(context, ArrayList())
 
@@ -27,7 +31,10 @@ abstract class BaseMultiBindingAdapter<T>(context: Context, list: ArrayList<T> =
 
     abstract fun getMultiLayoutId(data: T): Int
 
-    override fun onBindBindingViewHolder(holder: BaseBindingViewHolder<ViewDataBinding>, position: Int) {
+    override fun onBindBindingViewHolder(
+        holder: BaseBindingViewHolder<ViewDataBinding>,
+        position: Int
+    ) {
         val bean = list[position] ?: return
         convertBefore(holder, bean, position)
         convert(holder, bean, position)

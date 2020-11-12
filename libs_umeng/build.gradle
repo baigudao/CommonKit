@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+def config = rootProject.ext
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -23,14 +26,37 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.3.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+    implementation 'com.umeng.sdk:utdid:1.1.5.3'
+    //PushSDK必须依赖基础组件库，所以需要加入对应依赖
+    implementation 'com.umeng.sdk:common:1.5.3'
+    // 友盟统计
+    api 'com.umeng.sdk:analytics:7.5.3'
+    //PushSDK
+    api 'com.umeng.sdk:push:4.2.0'
 }

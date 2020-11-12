@@ -1,12 +1,11 @@
-package com.ssf.framework.main.swipebacklayout.app
+package com.common.main.swipebacklayout.app
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-
-import com.ssf.framework.main.swipebacklayout.SwipeBackLayout
-import com.ssf.framework.main.swipebacklayout.Utils
+import com.common.main.swipebacklayout.SwipeBackLayout
+import com.common.main.swipebacklayout.Utils
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
 

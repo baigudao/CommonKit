@@ -1,4 +1,4 @@
-package com.ssf.framework.main.activity
+package com.common.main.activity
 
 import android.os.Bundle
 

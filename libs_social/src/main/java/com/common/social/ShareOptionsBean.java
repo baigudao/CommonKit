@@ -1,5 +1,6 @@
 package com.common.social;
 
+
 import com.umeng.socialize.media.UMImage;
 
 /**

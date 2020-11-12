@@ -1,4 +1,4 @@
-package com.ssf.framework.widget.ex
+package com.common.widget.ex
 
 
 /**
@@ -7,7 +7,7 @@ package com.ssf.framework.widget.ex
  * @describe
  */
 
-public interface IConfig{
+interface IConfig {
     companion object {
         val PROGRESS_TAG = "PROGRESS_TAG"
         val HintDialog_TAG = "HintDialog_TAG"

@@ -1,9 +1,10 @@
 package com.common.mvvm.bind.list;
 
-import android.support.v7.util.ListUpdateCallback;
-import android.support.v7.widget.RecyclerView;
 
-import com.ssf.framework.main.mvvm.adapter.BaseBindingAdapter;
+import androidx.recyclerview.widget.ListUpdateCallback;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.common.mvvm.adapter.BaseBindingAdapter;
 
 /**
  * 带头部适配器列表增量更新

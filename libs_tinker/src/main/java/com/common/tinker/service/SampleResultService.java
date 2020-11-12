@@ -19,11 +19,11 @@ package com.common.tinker.service;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.common.tinker.util.ILocalBroadcast;
 import com.tencent.tinker.lib.service.DefaultTinkerResultService;
 import com.tencent.tinker.lib.service.PatchResult;
 import com.tencent.tinker.lib.util.TinkerLog;
 import com.tencent.tinker.lib.util.TinkerServiceInternals;
-import com.xm.updates.tinker.util.ILocalBroadcast;
 
 import java.io.File;
 
@@ -87,14 +87,14 @@ public class SampleResultService extends DefaultTinkerResultService {
              * 成功
              */
             Intent intent = new Intent(ILocalBroadcast.TINKER_RESULT_ACTION);
-            intent.putExtra(ILocalBroadcast.TINKER_RESULT_SUCCESS,true);
+            intent.putExtra(ILocalBroadcast.TINKER_RESULT_SUCCESS, true);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-        }else{
+        } else {
             /**
              * 失败
              */
             Intent intent = new Intent(ILocalBroadcast.TINKER_RESULT_ACTION);
-            intent.putExtra(ILocalBroadcast.TINKER_RESULT_SUCCESS,false);
+            intent.putExtra(ILocalBroadcast.TINKER_RESULT_SUCCESS, false);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
         }
     }

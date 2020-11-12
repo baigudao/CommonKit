@@ -1,7 +1,7 @@
 package com.common.mvvm.livedata
 
 import android.annotation.SuppressLint
-import com.ssf.framework.main.mvvm.livedata.event.SubscribeLiveData
+import com.common.mvvm.livedata.event.SubscribeLiveData
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 

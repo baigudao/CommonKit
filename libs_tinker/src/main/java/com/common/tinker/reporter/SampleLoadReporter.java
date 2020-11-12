@@ -22,10 +22,10 @@ import android.os.Looper;
 import android.os.MessageQueue;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.common.tinker.util.ILocalBroadcast;
 import com.tencent.tinker.lib.reporter.DefaultLoadReporter;
 import com.tencent.tinker.lib.util.UpgradePatchRetry;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
-import com.xm.updates.tinker.util.ILocalBroadcast;
 
 import java.io.File;
 

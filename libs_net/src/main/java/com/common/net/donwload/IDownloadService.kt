@@ -1,4 +1,4 @@
-package com.ssf.framework.net.donwload
+package com.common.net.donwload
 
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -12,7 +12,7 @@ import retrofit2.http.Url
  * @time: 2018/5/9
  * @说明: 下载文件专用
  */
-interface IDownloadService{
+interface IDownloadService {
 
     /*大文件需要加入这个判断，防止下载过程中写入到内存中*/
     @Streaming

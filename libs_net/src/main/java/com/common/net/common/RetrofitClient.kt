@@ -1,9 +1,9 @@
-package com.ssf.framework.net.common
+package com.common.net.common
 
+import com.common.log.KLog
+import com.common.net.ex.IConfig
+import com.common.net.interceptor.HeaderInterceptor
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.ssf.framework.net.ex.IConfig
-import com.ssf.framework.net.interceptor.HeaderInterceptor
-import com.xm.xlog.KLog
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -31,7 +31,8 @@ class RetrofitClient {
                 HttpLoggingInterceptor {
                     // 以{}或者[]形式的说明是响应结果的json数据，需要进行格式化
                     if ((it.startsWith("{") && it.endsWith("}")
-                                    || (it.startsWith("[") && it.endsWith("]")))) {
+                                || (it.startsWith("[") && it.endsWith("]")))
+                    ) {
                         KLog.json(IConfig.tag, it)
                     } else {
                         KLog.i(IConfig.tag, it)
@@ -44,12 +45,12 @@ class RetrofitClient {
 
             //初始化OkHttp
             val okHttpBuilder = OkHttpClient.Builder()
-                    .retryOnConnectionFailure(true)
-                    .readTimeout(builder.readTimeout, TimeUnit.SECONDS)
-                    .connectTimeout(builder.connectionTimeout, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .readTimeout(builder.readTimeout, TimeUnit.SECONDS)
+                .connectTimeout(builder.connectionTimeout, TimeUnit.SECONDS)
             // header
             okHttpBuilder.addInterceptor(HeaderInterceptor(builder.headers))
-                    .addNetworkInterceptor(StethoInterceptor()) //添加fackebook Stetho
+                .addNetworkInterceptor(StethoInterceptor()) //添加fackebook Stetho
             // log
             loggingInterceptor?.apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -57,16 +58,16 @@ class RetrofitClient {
             }
             // 构建
             return Retrofit.Builder()
-                    //增加返回值为String的支持
-                    .addConverterFactory(ScalarsConverterFactory.create())
-                    //增加返回值为Gson的支持(以实体类返回)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .client(okHttpBuilder.build())
-                    // 多域名
-                    .baseUrl(builder.baseUrl)
-                    .build()
-                    .create(cls)
+                //增加返回值为String的支持
+                .addConverterFactory(ScalarsConverterFactory.create())
+                //增加返回值为Gson的支持(以实体类返回)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpBuilder.build())
+                // 多域名
+                .baseUrl(builder.baseUrl)
+                .build()
+                .create(cls)
         }
     }
 
@@ -75,17 +76,17 @@ class RetrofitClient {
      * Builder 模式构建配置
      */
     class Builder<out T>(
-            private val cls: Class<T>,
-            // 是否开启调试输出
-            val debug: Boolean = false,
-            // 当前http网络请求
-            val baseUrl: String,
-            // 读取超时 - 默认6秒
-            val readTimeout: Long = 6,
-            // 超时链接 - 默认6秒
-            val connectionTimeout: Long = 6,
-            // 头部
-            val headers: () -> HashMap<String, String>
+        private val cls: Class<T>,
+        // 是否开启调试输出
+        val debug: Boolean = false,
+        // 当前http网络请求
+        val baseUrl: String,
+        // 读取超时 - 默认6秒
+        val readTimeout: Long = 6,
+        // 超时链接 - 默认6秒
+        val connectionTimeout: Long = 6,
+        // 头部
+        val headers: () -> HashMap<String, String>
     ) {
 
         fun create() = RetrofitClient.createRetrofit(this, cls)

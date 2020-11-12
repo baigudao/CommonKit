@@ -1,6 +1,5 @@
-package com.ssf.framework.net.transformer
+package com.common.net.transformer
 
-import com.ssf.framework.net.common.RetryWhenNetwork
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
@@ -15,9 +14,9 @@ import io.reactivex.schedulers.Schedulers
 @Deprecated(message = "This class is no longer supported, do not use it.")
 class wrapperSchedulers<T> : ObservableTransformer<T, T> {
     override fun apply(upstream: Observable<T>): ObservableSource<T> =
-            upstream
-                    // .delay(5, TimeUnit.SECONDS)     //请求延迟五秒，再开始
-                    .subscribeOn(Schedulers.io())
-                    .unsubscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread(), true)
+        upstream
+            // .delay(5, TimeUnit.SECONDS)     //请求延迟五秒，再开始
+            .subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread(), true)
 }

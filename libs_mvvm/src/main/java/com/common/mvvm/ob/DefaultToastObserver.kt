@@ -1,10 +1,10 @@
 package com.common.mvvm.ob
 
-import android.arch.lifecycle.Observer
-import android.support.v4.app.FragmentActivity
-import com.ssf.framework.main.mvvm.livedata.ToastLiveData
-import com.ssf.framework.widget.ex.IToast
-import com.ssf.framework.widget.ex.toast
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import com.common.mvvm.livedata.ToastLiveData
+import com.common.widget.ex.IToast
+import com.common.widget.ex.toast
 
 /**
  * Created by hzz on 2018/8/18.

@@ -1,5 +1,15 @@
 package com.common.mvvm.vm
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.common.mvvm.ob.DefaultActivityObserver
+import com.common.mvvm.ob.DefaultErrorObserver
+import com.common.mvvm.ob.DefaultProgressObserver
+import com.common.mvvm.ob.DefaultToastObserver
+
 
 /**
  * ViewModel提供者
@@ -9,17 +19,21 @@ package com.common.mvvm.vm
  * Application级的ViewModelStore,只能存AppViewModel
  * Created by hzz on 2018/8/18.
  */
-class SuperViewModelProvider(private val lifecycleOwner: LifecycleOwner, factory: Factory,
-                             private val appViewModelProvider: ViewModelProvider? = null) : ViewModelProvider(
-        if (lifecycleOwner is FragmentActivity) {
-            lifecycleOwner
-        } else if (lifecycleOwner is Fragment && lifecycleOwner.activity != null) {
-            lifecycleOwner.activity!!
-        } else {//activity is null
-            throw RuntimeException("Fragment中创建ViewModel必须在onAttach之后")
-        }, factory) {
+class SuperViewModelProvider(
+    private val lifecycleOwner: LifecycleOwner, factory: Factory,
+    private val appViewModelProvider: ViewModelProvider? = null
+) : ViewModelProvider(
+    if (lifecycleOwner is FragmentActivity) {
+        lifecycleOwner
+    } else if (lifecycleOwner is Fragment && lifecycleOwner.activity != null) {
+        lifecycleOwner.activity!!
+    } else {//activity is null
+        throw RuntimeException("Fragment中创建ViewModel必须在onAttach之后")
+    }, factory
+) {
 
     private lateinit var activity: FragmentActivity
+
     //各个工程自定义风格的处理者
     private var mCustomObserverProvider: IObserverProvider? = null
 
@@ -34,15 +48,15 @@ class SuperViewModelProvider(private val lifecycleOwner: LifecycleOwner, factory
     //置为全局是为了同个ViewModelStore作用于相同的对象
     private val defaultProgressObserver by lazy {
         VMSetup.getInstance().defaultObserverProvider?.providerProgressObserver(activity)
-                ?: DefaultProgressObserver(activity)
+            ?: DefaultProgressObserver(activity)
     }
     private val defaultToastObserver by lazy {
         VMSetup.getInstance().defaultObserverProvider?.providerToastObserver(activity)
-                ?: DefaultToastObserver(activity)
+            ?: DefaultToastObserver(activity)
     }
     private val defaultErrorObserver by lazy {
         VMSetup.getInstance().defaultObserverProvider?.providerErrorObserver(activity)
-                ?: DefaultErrorObserver(activity)
+            ?: DefaultErrorObserver(activity)
     }
     private val defaultActivityObserver by lazy { DefaultActivityObserver(activity) }
 
@@ -61,12 +75,18 @@ class SuperViewModelProvider(private val lifecycleOwner: LifecycleOwner, factory
         if (vm is BaseViewModel) {
             //如果是BaseViewModel处理一些默认监听，因为是Activity内共享的，监听时要考虑多个VM可能会造成的冲突
             //如果自定义的Observer提供者中有提供自己的处理就使用提供者的，否则就用默认的
-            vm.progress.observeEvent(lifecycleOwner, mCustomObserverProvider?.providerProgressObserver(activity)
-                    ?: defaultProgressObserver)
-            vm.toast.observeEvent(lifecycleOwner, mCustomObserverProvider?.providerToastObserver(activity)
-                    ?: defaultToastObserver)
-            vm.error.defaultObserver(mCustomObserverProvider?.providerErrorObserver(activity)
-                    ?: defaultErrorObserver)
+            vm.progress.observeEvent(
+                lifecycleOwner, mCustomObserverProvider?.providerProgressObserver(activity)
+                    ?: defaultProgressObserver
+            )
+            vm.toast.observeEvent(
+                lifecycleOwner, mCustomObserverProvider?.providerToastObserver(activity)
+                    ?: defaultToastObserver
+            )
+            vm.error.defaultObserver(
+                mCustomObserverProvider?.providerErrorObserver(activity)
+                    ?: defaultErrorObserver
+            )
             vm.activity.observeEvent(lifecycleOwner, defaultActivityObserver)
         }
         return vm

@@ -54,9 +54,9 @@ public class Utils {
             Class[] method = t;
             int len$ = t.length;
 
-            for(int i$ = 0; i$ < len$; ++i$) {
+            for (int i$ = 0; i$ < len$; ++i$) {
                 Class clazz = method[i$];
-                if(clazz.getSimpleName().contains("TranslucentConversionListener")) {
+                if (clazz.getSimpleName().contains("TranslucentConversionListener")) {
                     translucentConversionListenerClazz = clazz;
                     break;
                 }
@@ -89,8 +89,8 @@ public class Utils {
             Method method = Activity.class.getDeclaredMethod("convertToTranslucent",
                     translucentConversionListenerClazz);
             method.setAccessible(true);
-            method.invoke(activity, new Object[] {
-                null
+            method.invoke(activity, new Object[]{
+                    null
             });
         } catch (Throwable t) {
         }

@@ -1,7 +1,8 @@
 package com.common.mvvm.livedata
 
-import com.ssf.framework.main.mvvm.livedata.event.EventLiveData
-import com.ssf.framework.widget.ex.IToast
+import com.common.mvvm.livedata.event.EventLiveData
+import com.common.widget.ex.IToast
+
 
 /**
  * Created by hzz on 2018/8/18.

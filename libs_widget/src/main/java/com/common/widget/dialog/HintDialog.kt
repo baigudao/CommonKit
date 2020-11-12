@@ -1,4 +1,4 @@
-package com.ssf.framework.widget.dialog
+package com.common.widget.dialog
 
 import android.content.DialogInterface
 import android.graphics.Color
@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
-import com.ssf.framework.widget.R
+import com.common.widget.R
 
 
 /**
@@ -22,6 +22,7 @@ import com.ssf.framework.widget.R
 class HintDialog : DialogFragment() {
     // rootview
     private lateinit var mInflate: View
+
     // 事件
     private var sureListener: (View) -> Unit = {}
     private var dismissListener: (View) -> Unit = {}
@@ -30,14 +31,19 @@ class HintDialog : DialogFragment() {
         /**
          * 创建构造方法
          */
-        fun newInstance(message: String, title: String = "提示", sureText: String = "确定", cancelText: String? = "取消"): HintDialog {
+        fun newInstance(
+            message: String,
+            title: String = "提示",
+            sureText: String = "确定",
+            cancelText: String? = "取消"
+        ): HintDialog {
             val dialog = HintDialog()
             val bundle = Bundle()
-            bundle.putString("title",title)
-            bundle.putString("message",message)
-            bundle.putString("sureText",sureText)
-            if (cancelText != null){
-                bundle.putString("cancelText",cancelText)
+            bundle.putString("title", title)
+            bundle.putString("message", message)
+            bundle.putString("sureText", sureText)
+            if (cancelText != null) {
+                bundle.putString("cancelText", cancelText)
             }
             dialog.arguments = bundle
             return dialog
@@ -45,18 +51,24 @@ class HintDialog : DialogFragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         mInflate = inflater.inflate(R.layout.layout_dialog_hint, container, true)!!
         // 初始化View
         mInflate.findViewById<TextView>(R.id.dialog_tv_title).text = arguments!!.getString("title")
-        mInflate.findViewById<TextView>(R.id.dialog_tv_message).text = arguments!!.getString("message")
-        mInflate.findViewById<TextView>(R.id.dialog_tv_ensure).text = arguments!!.getString("sureText")
+        mInflate.findViewById<TextView>(R.id.dialog_tv_message).text =
+            arguments!!.getString("message")
+        mInflate.findViewById<TextView>(R.id.dialog_tv_ensure).text =
+            arguments!!.getString("sureText")
         val cancelText = arguments!!.getString("cancelText")
-        if (cancelText != null && cancelText.isNotEmpty()){
+        if (cancelText != null && cancelText.isNotEmpty()) {
             mInflate.findViewById<TextView>(R.id.dialog_tv_cancel).text = cancelText
-        }else{
+        } else {
             mInflate.findViewById<TextView>(R.id.dialog_tv_cancel).visibility = View.GONE
             mInflate.findViewById<View>(R.id.dialog_btn_divider).visibility = View.GONE
         }
@@ -72,7 +84,7 @@ class HintDialog : DialogFragment() {
         return mInflate
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         // 销毁回调
         dismissListener(mInflate)
@@ -81,7 +93,12 @@ class HintDialog : DialogFragment() {
     /**
      * 显示HintDialog 带事件回调
      */
-    fun show(manager: FragmentManager, tag: String, sureListener: (View) -> Unit, dismissListener: (View) -> Unit = {}):HintDialog {
+    fun show(
+        manager: FragmentManager,
+        tag: String,
+        sureListener: (View) -> Unit,
+        dismissListener: (View) -> Unit = {}
+    ): HintDialog {
         super.show(manager, tag)
         this.sureListener = sureListener
         this.dismissListener = dismissListener

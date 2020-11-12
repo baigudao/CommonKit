@@ -1,4 +1,4 @@
-package com.ssf.framework.net.ex
+package com.common.net.ex
 
 
 /**
@@ -6,7 +6,7 @@ package com.ssf.framework.net.ex
  * @data 2018/4/25
  * @describe
  */
-interface IConfig{
+interface IConfig {
     companion object {
         val tag = "XNet"
 
@@ -14,6 +14,7 @@ interface IConfig{
          * 多域名，如果单域名不切换
          */
         var DOMAIN_URL = ""
+
         /**
          * 网络请求加载框 TAG
          */

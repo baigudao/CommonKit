@@ -1,4 +1,4 @@
-package com.xm.xnet.exception
+package com.common.net.exception
 
 /**
  * @author yedanmin
@@ -6,9 +6,9 @@ package com.xm.xnet.exception
  * @describe
  */
 class ApiException(
-        val code:CodeException,
+        val code: CodeException,
         // 状态吗
-        val statusCode:Int,
+        val statusCode: Int,
         // 数据
-        val displayMessage:String
-):Throwable()
+        val displayMessage: String
+) : Throwable()

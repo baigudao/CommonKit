@@ -1,8 +1,9 @@
 package com.common.mvvm.livedata.event
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+
 
 /**
  * 针对初次订阅时，总时会收到订阅之前的事件问题修改
@@ -19,14 +20,14 @@ import android.arch.lifecycle.Observer
  * @link {http://www.cnblogs.com/meituantech/p/9376449.html}
  * Created by hzz on 2018/8/19.
  */
-open class SubscribeLiveData<T>: LiveData<T>() {
+open class SubscribeLiveData<T> : LiveData<T>() {
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
+    override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
         super.observe(owner, observer)
         hook(observer)
     }
 
-    private fun hook(observer: Observer<T>) {
+    private fun hook(observer: Observer<in T>) {
         //liveData.mObservers
         val clzLiveData = LiveData::class.java
         val fieldObservers = clzLiveData.getDeclaredField("mObservers")
@@ -38,8 +39,8 @@ open class SubscribeLiveData<T>: LiveData<T>() {
         methodGet.isAccessible = true
         //执行mObservers.get(observer),返回LifecycleBoundObserver对象(继承自ObserverWrapper)
         val objWrapperEntry = methodGet.invoke(objObservers, observer)
-        var objWrapper:Any? =null
-        if(objWrapperEntry is Map.Entry<*,*>){
+        var objWrapper: Any? = null
+        if (objWrapperEntry is Map.Entry<*, *>) {
             objWrapper = objWrapperEntry.value
         }
 
@@ -54,7 +55,7 @@ open class SubscribeLiveData<T>: LiveData<T>() {
             fieldLastVersion.isAccessible = true
             fieldVersion.isAccessible = true
             val version = fieldVersion.get(this)
-            fieldLastVersion.set(objWrapper,version)
+            fieldLastVersion.set(objWrapper, version)
             //end
             clzObserverWrapper
         }
@@ -62,7 +63,7 @@ open class SubscribeLiveData<T>: LiveData<T>() {
     }
 
     //observeForever源码分析不能按照observe方式去处理，处理方法时查询调用栈，如果是observeForever发起的就不执行
-    override fun observeForever(observer: Observer<T>) {
+    override fun observeForever(observer: Observer<in T>) {
         super.observeForever(ObserverWrapper(observer))
     }
 
@@ -70,7 +71,7 @@ open class SubscribeLiveData<T>: LiveData<T>() {
     class ObserverWrapper<T>(val observer: Observer<T>) : Observer<T> {
 
         override fun onChanged(t: T?) {
-            if(isCallObserve()){
+            if (isCallObserve()) {
                 return
             }
             observer.onChanged(t)
@@ -79,7 +80,7 @@ open class SubscribeLiveData<T>: LiveData<T>() {
         /**
          * 查看调用栈，有点高逼格 Orz
          */
-        private fun isCallObserve():Boolean{
+        private fun isCallObserve(): Boolean {
             val stackTrace = Thread.currentThread().stackTrace
             if (stackTrace != null && stackTrace.isNotEmpty()) {
                 for (element in stackTrace) {

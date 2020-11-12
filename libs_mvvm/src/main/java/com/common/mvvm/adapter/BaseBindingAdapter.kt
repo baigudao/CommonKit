@@ -1,18 +1,16 @@
 package com.common.mvvm.adapter
 
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.ssf.framework.autolayout.utils.AutoUtils
-import com.ssf.framework.main.adapter.BaseViewHolder
-import java.util.LinkedHashSet
-import kotlin.collections.ArrayList
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.common.autolayout.utils.AutoUtils
+import com.common.refreshlayout.adapter.BaseViewHolder
 
 /**
  * @atuthor ydm
@@ -20,11 +18,12 @@ import kotlin.collections.ArrayList
  * @describe
  */
 abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
-        context: Context,
-        private val layoutID: Int,
-        val list: ArrayList<T> = ArrayList(),
-        // Item点击监听回调
-        var itemClickListener: BaseBindingAdapter.OnItemClickListener<T>? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    context: Context,
+    private val layoutID: Int,
+    val list: ArrayList<T> = ArrayList(),
+    // Item点击监听回调
+    var itemClickListener: BaseBindingAdapter.OnItemClickListener<T>? = null
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val VIEW_TYPE_HEADER = -100
@@ -35,7 +34,13 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
     protected val clickIDs by lazy { LinkedHashSet<Int>() }
 
     @Deprecated("给子布局设置监听，请使用holder中的addClickListener方法,会回调在OnItemChildClickListener中")
-    constructor(context: Context, layoutID: Int, list: ArrayList<T> = ArrayList(), itemClickListener: BaseBindingAdapter.OnItemClickListener<T>? = null, vararg clickIDs: Int) : this(context, layoutID, list, itemClickListener) {
+    constructor(
+        context: Context,
+        layoutID: Int,
+        list: ArrayList<T> = ArrayList(),
+        itemClickListener: BaseBindingAdapter.OnItemClickListener<T>? = null,
+        vararg clickIDs: Int
+    ) : this(context, layoutID, list, itemClickListener) {
         //兼容旧API
         clickIDs.forEach {
             if (it > 0) {
@@ -50,12 +55,15 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
 
     private var mHeaderLayout: LinearLayout? = null
     private var mFooterLayout: LinearLayout? = null
+
     //头部占span是否和其它item相同
     var isHeaderViewAsFlow = false
+
     //尾部占span是否和其它item相同
     var isFooterViewAsFlow = false
 
-    private val layoutInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val layoutInflater: LayoutInflater =
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     open fun getLayoutId(viewType: Int): Int {
         return layoutID//默认返回传入的layout，可重写实现多布局
@@ -111,14 +119,21 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
         }
     }
 
-    protected open fun createBaseViewHolder(parent: ViewGroup, viewType: Int, itemView: View): BaseViewHolder {
+    protected open fun createBaseViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+        itemView: View
+    ): BaseViewHolder {
         return BaseViewHolder(itemView)
     }
 
-    protected open fun createBindingViewHolder(parent: ViewGroup, viewType: Int): BaseBindingViewHolder<B> {
+    protected open fun createBindingViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseBindingViewHolder<B> {
         val layoutId = getLayoutId(viewType)
         val binding = DataBindingUtil.inflate<B>(layoutInflater, layoutId, parent, false)
-                ?: throw RuntimeException("layoutID 必须是以根布局为<layout/>的DataBinding方式创建")
+            ?: throw RuntimeException("layoutID 必须是以根布局为<layout/>的DataBinding方式创建")
         // 创建
         AutoUtils.auto(binding.root)
         //
@@ -134,7 +149,10 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
             }//undo
             else -> {
                 //实际上绑定数据的ViewHolder
-                onBindBindingViewHolder(holder as BaseBindingViewHolder<B>, position - getHeaderLayoutCount())
+                onBindBindingViewHolder(
+                    holder as BaseBindingViewHolder<B>,
+                    position - getHeaderLayoutCount()
+                )
             }
         }
     }
@@ -210,7 +228,11 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
      *  初始化Item监听
      *  @param inflate   绑定的布局
      */
-    protected open fun initializationItemListener(inflate: View, holder: BaseBindingViewHolder<B>, position: Int) {
+    protected open fun initializationItemListener(
+        inflate: View,
+        holder: BaseBindingViewHolder<B>,
+        position: Int
+    ) {
         initializationItemClickListener(inflate, holder, position)//item监听
         initializationItemChildClickListener(inflate, holder, position)//childItem监听
     }
@@ -219,7 +241,11 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
      *  Item 点击回调
      *  @param inflate   绑定的布局
      */
-    protected open fun initializationItemClickListener(inflate: View, holder: BaseBindingViewHolder<B>, position: Int) {
+    protected open fun initializationItemClickListener(
+        inflate: View,
+        holder: BaseBindingViewHolder<B>,
+        position: Int
+    ) {
         //点击
         itemClickListener?.let {
             // 给 root item 设置监听
@@ -268,7 +294,11 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
     /**
      * Item 子View点击回调
      */
-    protected open fun initializationItemChildClickListener(inflate: View, holder: BaseBindingViewHolder<B>, position: Int) {
+    protected open fun initializationItemChildClickListener(
+        inflate: View,
+        holder: BaseBindingViewHolder<B>,
+        position: Int
+    ) {
         //点击
         itemChildClickListener?.let {
             holder.childClickViewIds.forEach {
@@ -297,10 +327,18 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
         itemChildClickListener?.onItemChildClick(view, this, list[position], position)
     }
 
-    protected open fun notifyItemChildLongClick(view: View, holder: BaseBindingViewHolder<B>): Boolean {
+    protected open fun notifyItemChildLongClick(
+        view: View,
+        holder: BaseBindingViewHolder<B>
+    ): Boolean {
         val position = getViewHolderLayoutPosition(holder)
-        return itemChildLongClickListener?.onItemChildLongClick(view, this, list[position], position)
-                ?: false
+        return itemChildLongClickListener?.onItemChildLongClick(
+            view,
+            this,
+            list[position],
+            position
+        )
+            ?: false
     }
 
     protected open fun getViewHolderLayoutPosition(holder: BaseBindingViewHolder<B>): Int {
@@ -316,7 +354,10 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
         if (headLayout == null) {
             headLayout = LinearLayout(view.context)
             headLayout.orientation = LinearLayout.VERTICAL
-            headLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            headLayout.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             mHeaderLayout = headLayout
         }
 
@@ -344,7 +385,10 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
         if (footLayout == null) {
             footLayout = LinearLayout(view.context)
             footLayout.orientation = LinearLayout.VERTICAL
-            footLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            footLayout.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             mFooterLayout = footLayout
         }
 
@@ -435,7 +479,12 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
     }
 
     interface OnItemLongClickListener<T> {
-        fun onLongClick(view: View, adapter: BaseBindingAdapter<T, *>, bean: T, position: Int): Boolean
+        fun onLongClick(
+            view: View,
+            adapter: BaseBindingAdapter<T, *>,
+            bean: T,
+            position: Int
+        ): Boolean
     }
 
     interface OnItemChildClickListener<T> {
@@ -443,7 +492,12 @@ abstract class BaseBindingAdapter<T, B : ViewDataBinding>(
     }
 
     interface OnItemChildLongClickListener<T> {
-        fun onItemChildLongClick(view: View, adapter: BaseBindingAdapter<T, *>, bean: T, position: Int): Boolean
+        fun onItemChildLongClick(
+            view: View,
+            adapter: BaseBindingAdapter<T, *>,
+            bean: T,
+            position: Int
+        ): Boolean
     }
 }
 

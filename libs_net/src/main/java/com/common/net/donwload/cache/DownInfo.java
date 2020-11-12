@@ -1,9 +1,8 @@
 package com.common.net.donwload.cache;
 
 
-
-import com.ssf.framework.net.donwload.DownloadSubscriber;
-import com.ssf.framework.net.donwload.interfac.DownState;
+import com.common.net.donwload.DownloadSubscriber;
+import com.common.net.donwload.interfac.DownState;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -36,7 +35,7 @@ public class DownInfo {
     @Transient
     DownloadSubscriber<DownInfo> downloadSubscriber;
 
-    public DownInfo(String url,String savePath,String fileName){
+    public DownInfo(String url, String savePath, String fileName) {
         this.url = url;
         this.savePath = savePath;
         this.fileName = fileName;
@@ -44,7 +43,7 @@ public class DownInfo {
 
     @Generated(hash = 1290198047)
     public DownInfo(Long id, String url, String savePath, String fileName,
-            long readLength, long countLength, int downState) {
+                    long readLength, long countLength, int downState) {
         this.id = id;
         this.url = url;
         this.savePath = savePath;
@@ -114,20 +113,29 @@ public class DownInfo {
         this.downState = downState;
     }
 
-    /** 观察者 */
+    /**
+     * 观察者
+     */
     public DownloadSubscriber<DownInfo> getDownloadSubscriber() {
         return downloadSubscriber;
     }
+
     public void setDownloadSubscriber(DownloadSubscriber<DownInfo> downloadSubscriber) {
         this.downloadSubscriber = downloadSubscriber;
     }
-    /** 进度条  max:100 */
-    public int getProgress(){
+
+    /**
+     * 进度条  max:100
+     */
+    public int getProgress() {
         return (int) (getReadLength() * 1.0 / getCountLength() * 100);
     }
-    /** 下载状态 */
+
+    /**
+     * 下载状态
+     */
     public DownState getState() {
-        switch (getDownState()){
+        switch (getDownState()) {
             case 0:
                 return DownState.NORMAL;
             case 1:
@@ -143,9 +151,12 @@ public class DownInfo {
                 return DownState.FINISH;
         }
     }
-    /** 对应下载状态，对应因该显示什么文本内容 */
-    public String getStateText(){
-        switch (getDownState()){
+
+    /**
+     * 对应下载状态，对应因该显示什么文本内容
+     */
+    public String getStateText() {
+        switch (getDownState()) {
             case 0:
                 return "下载";
             case 1:
@@ -163,8 +174,11 @@ public class DownInfo {
                 return "安装";
         }
     }
-    /** 重置属性，一般用于重新下载 */
-    public void reset(){
+
+    /**
+     * 重置属性，一般用于重新下载
+     */
+    public void reset() {
         setReadLength(0);
         setCountLength(0);
         downState = DownState.NORMAL.getState();

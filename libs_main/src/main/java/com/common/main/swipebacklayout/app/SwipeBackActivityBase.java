@@ -1,7 +1,7 @@
 package com.common.main.swipebacklayout.app;
 
 
-import com.ssf.framework.main.swipebacklayout.SwipeBackLayout;
+import com.common.main.swipebacklayout.SwipeBackLayout;
 
 /**
  * @author Yrom

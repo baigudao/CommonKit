@@ -1,11 +1,10 @@
 package com.common.mvvm.ob
 
-import android.arch.lifecycle.Observer
-import android.support.v4.app.FragmentActivity
 import android.view.View
-import com.ssf.framework.main.mvvm.vm.SuperViewModelProvider
-import com.ssf.framework.main.mvvm.livedata.ProgressLiveData
-import com.ssf.framework.widget.dialog.ProgressDialog
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import com.common.mvvm.livedata.ProgressLiveData
+import com.common.widget.dialog.ProgressDialog
 
 /**
  * Created by hzz on 2018/8/18.
@@ -14,6 +13,7 @@ class DefaultProgressObserver(val owner: FragmentActivity) : Observer<ProgressLi
     companion object {
         const val PROGRESS_TAG = -100
     }
+
     private val progressDialog by lazy { getProgress() }
 
 
@@ -22,7 +22,7 @@ class DefaultProgressObserver(val owner: FragmentActivity) : Observer<ProgressLi
         if (show) {
 //            progressDialog.setMessage(it?.message)
             progressDialog.show()
-            progressDialog.setCancelable(it?.cancelable ?:false)
+            progressDialog.setCancelable(it?.cancelable ?: false)
         } else if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }

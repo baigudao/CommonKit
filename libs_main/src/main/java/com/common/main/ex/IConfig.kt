@@ -1,4 +1,4 @@
-package com.ssf.framework.main.ex
+package com.common.main.ex
 
 /**
  * @author admin
@@ -6,7 +6,7 @@ package com.ssf.framework.main.ex
  * @describe
  */
 
-public interface IConfig{
+interface IConfig {
     companion object {
         const val LAYOUT_LINEARLAYOUT = "LinearLayout"
         const val LAYOUT_FRAMELAYOUT = "FrameLayout"

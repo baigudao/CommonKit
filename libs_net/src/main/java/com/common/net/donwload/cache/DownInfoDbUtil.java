@@ -2,7 +2,7 @@ package com.common.net.donwload.cache;
 
 import android.content.Context;
 
-import com.xm.xlog.KLog;
+import com.common.log.KLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -30,7 +30,7 @@ public class DownInfoDbUtil {
      * 单例
      */
     public static DownInfoDbUtil getInstance(Context context) {
-        if (db == null){
+        if (db == null) {
             db = new DownInfoDbUtil(context);
         }
         return db;
@@ -40,7 +40,7 @@ public class DownInfoDbUtil {
      * 增
      */
     public void insert(DownInfo info) {
-        KLog.e(TAG,"新增数据库..."  + info.getUrl());
+        KLog.e(TAG, "新增数据库..." + info.getUrl());
         DaoMaster daoMaster = new DaoMaster(mOpenHelper.getWritableDb());
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();
@@ -51,7 +51,7 @@ public class DownInfoDbUtil {
      * 删
      */
     public void delete(DownInfo info) {
-        KLog.e(TAG,"删除数据库..."  + info.getUrl());
+        KLog.e(TAG, "删除数据库..." + info.getUrl());
         DaoMaster daoMaster = new DaoMaster(mOpenHelper.getWritableDb());
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();
@@ -61,16 +61,16 @@ public class DownInfoDbUtil {
     /**
      * 改
      */
-    public void update(DownInfo info,boolean isPostMessage) {
+    public void update(DownInfo info, boolean isPostMessage) {
         DownInfo query = query(info.getUrl());
-        if( query != null){
+        if (query != null) {
             DaoMaster daoMaster = new DaoMaster(mOpenHelper.getWritableDb());
             DaoSession daoSession = daoMaster.newSession();
             DownInfoDao downInfoDao = daoSession.getDownInfoDao();
             info.setId(query.getId());
             downInfoDao.update(info);
             // EventBus
-            if (isPostMessage){
+            if (isPostMessage) {
                 KLog.e("发送消息 -> " + info.getUrl() + " 进度 " + info.getProgress() + " %");
                 EventBus.getDefault().post(info);
             }
@@ -81,7 +81,7 @@ public class DownInfoDbUtil {
      * 改
      */
     public void update(DownInfo info) {
-        update(info,true);
+        update(info, true);
     }
 
     /**
@@ -106,7 +106,7 @@ public class DownInfoDbUtil {
      * 查全部
      */
     public List<DownInfo> queryAll() {
-        KLog.e(TAG,"查询全部数据库");
+        KLog.e(TAG, "查询全部数据库");
         DaoMaster daoMaster = new DaoMaster(mOpenHelper.getReadableDb());
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();

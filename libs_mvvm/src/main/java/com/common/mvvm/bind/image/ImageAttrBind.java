@@ -1,8 +1,9 @@
 package com.common.mvvm.bind.image;
 
-import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 
 public class ImageAttrBind {
 

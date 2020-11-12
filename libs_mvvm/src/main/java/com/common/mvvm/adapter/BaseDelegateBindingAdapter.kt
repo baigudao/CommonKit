@@ -1,15 +1,16 @@
 package com.common.mvvm.adapter
 
 import android.content.Context
-import android.databinding.ViewDataBinding
 import android.view.View
-import com.ssf.framework.main.mvvm.adapter.delegate.ProviderDelegate
+import androidx.databinding.ViewDataBinding
+import com.common.mvvm.adapter.delegate.ProviderDelegate
 
 /**
  * 多布局代理适配器，适用大量多布局解耦使用
  * Created by Hzz on 2018/9/28
  */
-abstract class BaseDelegateBindingAdapter<T>(context: Context) : BaseMultiBindingAdapter<T>(context) {
+abstract class BaseDelegateBindingAdapter<T>(context: Context) :
+    BaseMultiBindingAdapter<T>(context) {
     /**
      * 多布局ItemProvider
      */
@@ -38,7 +39,11 @@ abstract class BaseDelegateBindingAdapter<T>(context: Context) : BaseMultiBindin
     }
 
 
-    override fun initializationItemChildClickListener(inflate: View, holder: BaseBindingViewHolder<ViewDataBinding>, position: Int) {
+    override fun initializationItemChildClickListener(
+        inflate: View,
+        holder: BaseBindingViewHolder<ViewDataBinding>,
+        position: Int
+    ) {
         super.initializationItemChildClickListener(inflate, holder, position)
         //没有设置child监听器时，click父类逻辑不会走注册，所以需要注册事件
         val itemProvider = providerDelegate.itemProviders.get(getDefItemViewType(position))
@@ -65,15 +70,18 @@ abstract class BaseDelegateBindingAdapter<T>(context: Context) : BaseMultiBindin
         val position = getViewHolderLayoutPosition(holder)
         //回调监听到Provider
         val itemProvider = providerDelegate.itemProviders.get(getDefItemViewType(position))
-        itemProvider?.onClick(view,holder, list[position], position)
+        itemProvider?.onClick(view, holder, list[position], position)
         super.notifyItemChildClick(view, holder)
     }
 
-    override fun notifyItemChildLongClick(view: View, holder: BaseBindingViewHolder<ViewDataBinding>): Boolean {
+    override fun notifyItemChildLongClick(
+        view: View,
+        holder: BaseBindingViewHolder<ViewDataBinding>
+    ): Boolean {
         val position = getViewHolderLayoutPosition(holder)
         //回调监听到Provider
         val itemProvider = providerDelegate.itemProviders.get(getDefItemViewType(position))
-        itemProvider?.onLongClick(view, holder,list[position], position)
+        itemProvider?.onLongClick(view, holder, list[position], position)
         return super.notifyItemLongClick(view, holder)
     }
 

@@ -1,13 +1,9 @@
-package com.ssf.framework.net.common
+package com.common.net.common
 
 import android.app.Activity
-import android.content.Context
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.app.FragmentManager
-import com.ssf.framework.net.ex.IConfig.Companion.NET_PROGRESS_TAG
-import com.ssf.framework.net.interfac.IDialog
-import com.ssf.framework.widget.dialog.ProgressDialog
-import com.xm.xlog.KLog
+import com.common.log.KLog
+import com.common.net.interfac.IDialog
+import com.common.widget.dialog.ProgressDialog
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -25,15 +21,16 @@ import io.reactivex.disposables.Disposable
  */
 @Deprecated(message = "This class is no longer supported, do not use it.")
 class ProgressSubscriber<T>(
-        //上下文对象
-        private val activity: Activity,
-        /* 显示dialog的方式 */
-        private val iDialog: IDialog = IDialog.UN_LOADING,
-        /* 回调 */
-        private val responseListener: ResponseListener<T>
+    //上下文对象
+    private val activity: Activity,
+    /* 显示dialog的方式 */
+    private val iDialog: IDialog = IDialog.UN_LOADING,
+    /* 回调 */
+    private val responseListener: ResponseListener<T>
 ) : Observer<T> {
     /* Disposable */
     private var disposable: Disposable? = null
+
     /* 加载进度条 */
     private val progressDialog by lazy { ProgressDialog(activity) }
 
@@ -71,8 +68,8 @@ class ProgressSubscriber<T>(
                 else -> {
                     //什么都不干，暂时
                 }
-             }
-            if (!activity.isFinishing){
+            }
+            if (!activity.isFinishing) {
                 progressDialog.show()
                 progressDialog.setDismissCallback {
                     if (disposable != null) {

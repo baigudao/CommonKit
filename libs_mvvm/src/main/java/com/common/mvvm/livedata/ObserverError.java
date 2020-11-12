@@ -1,6 +1,7 @@
 package com.common.mvvm.livedata;
 
-import com.ssf.framework.main.mvvm.livedata.ErrorLiveData.Error;
+
+import com.common.mvvm.livedata.ErrorLiveData.Error;
 
 import org.jetbrains.annotations.NotNull;
 /**

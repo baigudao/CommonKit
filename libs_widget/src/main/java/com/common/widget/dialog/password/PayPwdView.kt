@@ -11,7 +11,6 @@ import android.view.inputmethod.BaseInputConnection
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
 import com.common.widget.R
-import com.ssf.framework.widget.dialog.password.PwdInputMethodView
 import java.util.*
 
 /**
@@ -64,7 +63,11 @@ class PayPwdView : View {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(attrs)
     }
 
@@ -167,11 +170,22 @@ class PayPwdView : View {
         val height = height - 2
         //先画个圆角矩形
         mRoundRect!!.set(0f, (height / 8).toFloat(), width.toFloat(), (height / 8 * 7).toFloat())
-        canvas.drawRoundRect(mRoundRect!!, mRoundRadius.toFloat(), mRoundRadius.toFloat(), mBorderPaint!!)
+        canvas.drawRoundRect(
+            mRoundRect!!,
+            mRoundRadius.toFloat(),
+            mRoundRadius.toFloat(),
+            mBorderPaint!!
+        )
         //画分割线
         for (i in 1 until count) {
             val x = i * size
-            canvas.drawLine(x.toFloat(), (height / 8).toFloat(), x.toFloat(), (height / 8 * 7).toFloat(), mBorderPaint!!)
+            canvas.drawLine(
+                x.toFloat(),
+                (height / 8).toFloat(),
+                x.toFloat(),
+                (height / 8 * 7).toFloat(),
+                mBorderPaint!!
+            )
         }
         //画掩盖点,
         // 这是前面定义的变量 private ArrayList<Integer> result;//输入结果保存
@@ -203,7 +217,8 @@ class PayPwdView : View {
     }
 
 
-    private inner class MyInputConnection(targetView: View, fullEditor: Boolean) : BaseInputConnection(targetView, fullEditor) {
+    private inner class MyInputConnection(targetView: View, fullEditor: Boolean) :
+        BaseInputConnection(targetView, fullEditor) {
 
         override fun commitText(text: CharSequence, newCursorPosition: Int): Boolean {
             //这里是接受输入法的文本的，我们只处理数字，所以什么操作都不做
@@ -213,7 +228,12 @@ class PayPwdView : View {
         override fun deleteSurroundingText(beforeLength: Int, afterLength: Int): Boolean {
             //软键盘的删除键 DEL 无法直接监听，自己发送del事件
             return if (beforeLength == 1 && afterLength == 0) {
-                super.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL)) && super.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL))
+                super.sendKeyEvent(
+                    KeyEvent(
+                        KeyEvent.ACTION_DOWN,
+                        KeyEvent.KEYCODE_DEL
+                    )
+                ) && super.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL))
             } else super.deleteSurroundingText(beforeLength, afterLength)
         }
     }

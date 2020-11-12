@@ -1,9 +1,5 @@
-package com.ssf.framework.net.common
+package com.common.net.common
 
-import android.content.Context
-import com.ssf.framework.net.interfac.IDialog
-import com.ssf.framework.widget.dialog.ProgressDialog
-import com.xm.xlog.KLog
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -13,8 +9,8 @@ import io.reactivex.disposables.Disposable
  * @describe
  */
 class ResponseSubscriber<T>(
-        /* 回调 */
-        private val responseListener: ResponseListener<T>
+    /* 回调 */
+    private val responseListener: ResponseListener<T>
 ) : Observer<T> {
     /* Disposable */
     private var disposable: Disposable? = null

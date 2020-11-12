@@ -16,6 +16,11 @@
 
 package com.common.tinker.util;
 
+import com.common.tinker.crash.SampleUncaughtExceptionHandler;
+import com.common.tinker.reporter.SampleLoadReporter;
+import com.common.tinker.reporter.SamplePatchListener;
+import com.common.tinker.reporter.SamplePatchReporter;
+import com.common.tinker.service.SampleResultService;
 import com.tencent.tinker.lib.listener.PatchListener;
 import com.tencent.tinker.lib.patch.AbstractPatch;
 import com.tencent.tinker.lib.patch.UpgradePatch;
@@ -25,11 +30,6 @@ import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.lib.util.TinkerLog;
 import com.tencent.tinker.lib.util.UpgradePatchRetry;
 import com.tencent.tinker.loader.app.ApplicationLike;
-import com.xm.updates.tinker.crash.SampleUncaughtExceptionHandler;
-import com.xm.updates.tinker.reporter.SampleLoadReporter;
-import com.xm.updates.tinker.reporter.SamplePatchListener;
-import com.xm.updates.tinker.reporter.SamplePatchReporter;
-import com.xm.updates.tinker.service.SampleResultService;
 
 /**
  * Created by zhangshaowen on 16/7/3.
@@ -37,7 +37,7 @@ import com.xm.updates.tinker.service.SampleResultService;
 public class TinkerManager {
     private static final String TAG = "Tinker.TinkerManager";
 
-    private static ApplicationLike                applicationLike;
+    private static ApplicationLike applicationLike;
     private static SampleUncaughtExceptionHandler uncaughtExceptionHandler;
     private static boolean isInstalled = false;
 
@@ -95,8 +95,8 @@ public class TinkerManager {
         AbstractPatch upgradePatchProcessor = new UpgradePatch();
 
         TinkerInstaller.install(appLike,
-            loadReporter, patchReporter, patchListener,
-            SampleResultService.class, upgradePatchProcessor);
+                loadReporter, patchReporter, patchListener,
+                SampleResultService.class, upgradePatchProcessor);
 
         isInstalled = true;
     }

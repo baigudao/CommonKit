@@ -1,17 +1,17 @@
-package com.ssf.framework.main.activity
+package com.common.main.activity
 
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
-import com.ssf.framework.autolayout.AutoConstraintLayout
-import com.ssf.framework.autolayout.AutoFrameLayout
-import com.ssf.framework.autolayout.AutoLinearLayout
-import com.ssf.framework.autolayout.AutoRelativeLayout
-import com.ssf.framework.main.R
-import com.ssf.framework.main.ex.IConfig
-import com.ssf.framework.main.swipebacklayout.app.SwipeBackActivity
-import com.ssf.framework.main.util.StatusBarUtil
+import com.common.autolayout.AutoConstraintLayout
+import com.common.autolayout.AutoFrameLayout
+import com.common.autolayout.AutoLinearLayout
+import com.common.autolayout.AutoRelativeLayout
+import com.common.main.R
+import com.common.main.ex.IConfig
+import com.common.main.swipebacklayout.app.SwipeBackActivity
+import com.common.main.util.StatusBarUtil
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.umeng.analytics.MobclickAgent
 import io.reactivex.Observable
@@ -23,16 +23,16 @@ import java.util.concurrent.TimeUnit
  * BaseActivity基础类
  */
 abstract class BaseActivity(
-        // 自定义布局
-        private val layoutResID: Int,
-        //需要设置点击事件的ViewId
-        private vararg val ids: Int = intArrayOf(0),
-        // 是否可以滑动退出，默认true
-        private val swipeBackLayoutEnable: Boolean = true,
-        // StatusBar颜色
-        private val statusBarColor: Int = 0,
-        // StatusBar 透明度 (0 - 255)
-        private val statusBarAlpha: Int = 0
+    // 自定义布局
+    private val layoutResID: Int,
+    //需要设置点击事件的ViewId
+    private vararg val ids: Int = intArrayOf(0),
+    // 是否可以滑动退出，默认true
+    private val swipeBackLayoutEnable: Boolean = true,
+    // StatusBar颜色
+    private val statusBarColor: Int = 0,
+    // StatusBar 透明度 (0 - 255)
+    private val statusBarAlpha: Int = 0
 ) : SwipeBackActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,21 +62,22 @@ abstract class BaseActivity(
     }
 
     private fun setClickViewId() {
-        val disposable = Observable.create(object : ObservableOnSubscribe<View>, View.OnClickListener {
-            lateinit var emitter: ObservableEmitter<View>
-            override fun onClick(v: View) {
-                emitter.onNext(v)
-            }
-
-            override fun subscribe(emitter: ObservableEmitter<View>) {
-                this.emitter = emitter
-                ids.forEach { id ->
-                    if (id != 0) {
-                        findViewById<View>(id)?.setOnClickListener(this)
+        val disposable =
+            Observable.create(object : ObservableOnSubscribe<View>, View.OnClickListener {
+                    lateinit var emitter: ObservableEmitter<View>
+                    override fun onClick(v: View) {
+                        emitter.onNext(v)
                     }
-                }
-            }
-        }).compose(bindUntilEvent(ActivityEvent.DESTROY))
+
+                    override fun subscribe(emitter: ObservableEmitter<View>) {
+                        this.emitter = emitter
+                        ids.forEach { id ->
+                            if (id != 0) {
+                                findViewById<View>(id)?.setOnClickListener(this)
+                            }
+                        }
+                    }
+                }).compose(bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .subscribe { onClick(it) }
     }

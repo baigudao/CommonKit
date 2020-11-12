@@ -1,4 +1,4 @@
-package com.ssf.framework.widget.dialog
+package com.common.widget.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -7,7 +7,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import com.ssf.framework.widget.R
+import com.common.widget.R
 
 /**
  * 创建自定义ProgressDialog
@@ -46,18 +46,19 @@ class ProgressDialog(context: Context) : Dialog(context, R.style.loading_dialog_
     }
 
     /** 销毁回调 */
-    fun setDismissCallback(callback: () -> Unit){
+    fun setDismissCallback(callback: () -> Unit) {
         dismissCallback = callback
     }
 
     /** 旋转动画  */
     private fun startAnimation() {
         val messageView = findViewById<View>(R.id.net_tv_message)
-        if (messageView != null){
+        if (messageView != null) {
             val rotate = AnimationUtils.loadAnimation(context, R.anim.rotate)
             findViewById<View>(R.id.net_iv_loading).startAnimation(rotate)
-        }else{
-            val drawable = findViewById<ImageView>(R.id.net_iv_loading).drawable as? AnimationDrawable
+        } else {
+            val drawable =
+                findViewById<ImageView>(R.id.net_iv_loading).drawable as? AnimationDrawable
             drawable?.let {
                 drawable.start()
             }

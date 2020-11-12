@@ -1,10 +1,10 @@
 package com.common.mvvm.vm
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import com.ssf.framework.main.mvvm.lifecycle.RxLifecycleViewModel
-import com.ssf.framework.main.mvvm.lifecycle.ViewModelEvent
-import com.ssf.framework.main.mvvm.livedata.*
+import androidx.lifecycle.AndroidViewModel
+import com.common.mvvm.lifecycle.RxLifecycleViewModel
+import com.common.mvvm.lifecycle.ViewModelEvent
+import com.common.mvvm.livedata.*
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.RxLifecycle
@@ -14,7 +14,8 @@ import io.reactivex.subjects.BehaviorSubject
 /**
  * Created by hzz on 2018/8/18.
  */
-open class BaseViewModel constructor(application: Application) : AndroidViewModel(application), LifecycleProvider<ViewModelEvent> {
+open class BaseViewModel constructor(application: Application) : AndroidViewModel(application),
+    LifecycleProvider<ViewModelEvent> {
     private val lifecycleSubject = BehaviorSubject.create<ViewModelEvent>()
 
     val progress = ProgressLiveData()

@@ -6,11 +6,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.ssf.framework.main.R;
-import com.ssf.framework.main.swipebacklayout.SwipeBackLayout;
-import com.ssf.framework.main.swipebacklayout.Utils;
-import com.ssf.framework.main.swipebacklayout.app.SwipeBackActivity;
-import com.xm.xlog.KLog;
+import com.common.log.KLog;
+import com.common.main.R;
+import com.common.main.swipebacklayout.SwipeBackLayout;
+import com.common.main.swipebacklayout.Utils;
 
 
 /**

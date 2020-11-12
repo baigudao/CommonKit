@@ -1,4 +1,4 @@
-package com.ssf.framework.net.donwload.interfac
+package com.common.net.donwload.interfac
 
 /**
  * 下载状态
@@ -26,6 +26,7 @@ enum class DownState(var state: Int) {
                 else -> return FINISH
             }
         }
+
     /** 对应下载状态，真实表述  */
     val text: String
         get() {
@@ -39,6 +40,7 @@ enum class DownState(var state: Int) {
                 else -> "下载完成"
             }
         }
+
     /** 对应下载状态，反向描述  */
     val stateText: String
         get() {

@@ -1,11 +1,11 @@
-package com.ssf.framework.net.donwload
+package com.common.net.donwload
 
 import android.content.Context
 import android.os.Environment
-import com.ssf.framework.net.donwload.cache.DownInfo
-import com.ssf.framework.net.donwload.cache.DownInfoDbUtil
-import com.ssf.framework.net.donwload.interfac.DownState
-import com.xm.xlog.KLog
+import com.common.log.KLog
+import com.common.net.donwload.cache.DownInfo
+import com.common.net.donwload.cache.DownInfoDbUtil
+import com.common.net.donwload.interfac.DownState
 import okhttp3.ResponseBody
 import java.io.File
 import java.io.RandomAccessFile
@@ -34,7 +34,11 @@ class DownloadFileUtil {
         /**
          * 如果同一url新地址与旧文件命名不同时删除
          */
-        fun queryDownInfo(context: Context, downloadUrl: String, fileName: String? = null): DownInfo? {
+        fun queryDownInfo(
+            context: Context,
+            downloadUrl: String,
+            fileName: String? = null
+        ): DownInfo? {
             val query = DownInfoDbUtil.getInstance(context).query(downloadUrl)
             if (query != null) {
                 if (fileName != null) {
@@ -45,7 +49,7 @@ class DownloadFileUtil {
                         return null
                     }
                 }
-                if (query.state == DownState.FINISH && !File(query.savePath).exists()){
+                if (query.state == DownState.FINISH && !File(query.savePath).exists()) {
                     // 删除
                     DownInfoDbUtil.getInstance(context).delete(query)
                     // 文件不存在
@@ -59,7 +63,11 @@ class DownloadFileUtil {
         /**
          * 创建默认的 下载对象
          */
-        fun createDownInfo(context: Context,downloadUrl: String, fileName: String? = null): DownInfo {
+        fun createDownInfo(
+            context: Context,
+            downloadUrl: String,
+            fileName: String? = null
+        ): DownInfo {
             val file = if (fileName == null) {
                 var name = downloadUrl.substring(downloadUrl.lastIndexOf("/"))
                 if (!name.contains(".")) {
@@ -80,9 +88,9 @@ class DownloadFileUtil {
         /**
          * 写入文件
          */
-        fun writeCache(responseBody: ResponseBody,info: DownInfo){
+        fun writeCache(responseBody: ResponseBody, info: DownInfo) {
             val file = File(info.savePath)
-            if (!file.parentFile.exists()){
+            if (!file.parentFile.exists()) {
                 val mkdirs = file.mkdirs()
                 KLog.e("创建目录 -> $mkdirs")
             }
@@ -90,14 +98,18 @@ class DownloadFileUtil {
             if (allLength == 0L) {
                 allLength = responseBody.contentLength()
             }
-            RandomAccessFile(file,"rwd").use {
+            RandomAccessFile(file, "rwd").use {
                 it.channel.use {
-                    val mappedBuffer = it.map(FileChannel.MapMode.READ_WRITE, info.readLength, allLength - info.readLength)
+                    val mappedBuffer = it.map(
+                        FileChannel.MapMode.READ_WRITE,
+                        info.readLength,
+                        allLength - info.readLength
+                    )
                     responseBody.byteStream().use {
                         val buffer = ByteArray(1024 * 8)
-                        while ( true) {
+                        while (true) {
                             val len = it.read(buffer)
-                            if (len == -1){
+                            if (len == -1) {
                                 break
                             }
                             mappedBuffer.put(buffer, 0, len)

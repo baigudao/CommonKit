@@ -1,9 +1,10 @@
 package com.common.mvvm.livedata
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Observer
-import com.ssf.framework.main.mvvm.livedata.ErrorLiveData.Error
-import com.ssf.framework.main.mvvm.livedata.event.EventLiveData
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import com.common.mvvm.livedata.ErrorLiveData.Error
+import com.common.mvvm.livedata.event.EventLiveData
+
 
 /**
  * 错误处理
@@ -75,8 +76,8 @@ class ErrorLiveData : EventLiveData<Error>() {
 
 
     class Error(
-            val code: Int,//错误码
-            val message: String,//错误消息
-            val actionId: Int//用来标示执行的任务，非必填
+        val code: Int,//错误码
+        val message: String,//错误消息
+        val actionId: Int//用来标示执行的任务，非必填
     )
 }

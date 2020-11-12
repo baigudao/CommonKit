@@ -1,16 +1,17 @@
 package com.common.mvvm.activity
 
-import android.arch.lifecycle.ViewModelProvider
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+import com.common.mvvm.vm.SuperViewModelProvider
 import com.ssf.framework.main.activity.BaseFragment
-import com.ssf.framework.main.mvvm.vm.SuperViewModelProvider
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
+
 
 /**
  * @atuthor ydm
@@ -18,9 +19,9 @@ import javax.inject.Inject
  * @describe
  */
 abstract class MVVMFragment<T : ViewDataBinding>(
-        private val layoutResID: Int,
-        // click 列表
-        vararg ids: Int = intArrayOf(0)
+    private val layoutResID: Int,
+    // click 列表
+    vararg ids: Int = intArrayOf(0)
 ) : BaseFragment(layoutResID, *ids) {
     // mvvm
     protected lateinit var binding: T
@@ -46,7 +47,11 @@ abstract class MVVMFragment<T : ViewDataBinding>(
         private set
     private var backUserVisible: Boolean = false //备份之前的显示状态
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // 注入
         AndroidSupportInjection.inject(this)
         // dataBinding

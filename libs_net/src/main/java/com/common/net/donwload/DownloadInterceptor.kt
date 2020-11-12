@@ -1,4 +1,4 @@
-package com.ssf.framework.net.donwload
+package com.common.net.donwload
 
 import okhttp3.Interceptor
 import okhttp3.Response

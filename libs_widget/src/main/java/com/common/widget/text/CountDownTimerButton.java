@@ -4,21 +4,22 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.ssf.framework.widget.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+
+import com.common.widget.R;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author: xiong
@@ -75,7 +76,7 @@ public class CountDownTimerButton extends AppCompatButton implements View.OnClic
                 .take(duration)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Long>() {
+                .subscribe(new io.reactivex.Observer<Long>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable disposable) {
                         mDisposable = disposable;
@@ -104,6 +105,8 @@ public class CountDownTimerButton extends AppCompatButton implements View.OnClic
                         CountDownTimerButton.this.setBackgroundDrawable(bg);
                     }
                 });
+
+
     }
 
     @Override

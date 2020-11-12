@@ -1,11 +1,11 @@
-package com.ssf.framework.main.activity
+package com.common.main.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.IdRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxFragment
 import io.reactivex.Observable
@@ -14,16 +14,21 @@ import io.reactivex.ObservableOnSubscribe
 import java.util.concurrent.TimeUnit
 
 abstract class BaseFragment(
-        private val layoutResID: Int,
-        private vararg val ids: Int = intArrayOf(0)
+    private val layoutResID: Int,
+    private vararg val ids: Int = intArrayOf(0)
 ) : RxFragment(), View.OnClickListener {
 
     /* 主视图 */
     var mInflate: View? = null
+
     // 是否初始化过
     private var mInit = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         if (mInflate == null) {
             mInflate = inflater.inflate(layoutResID, container, false)
         }
@@ -36,7 +41,7 @@ abstract class BaseFragment(
     /**
      * 初始化默认配置
      */
-    open fun initDefaultConfig(savedInstanceState: Bundle?){
+    open fun initDefaultConfig(savedInstanceState: Bundle?) {
         if (!mInit) {
             mInit = true
             init(mInflate, savedInstanceState)
@@ -68,22 +73,22 @@ abstract class BaseFragment(
     protected fun setClickViewId(view: View?) {
         view?.let {
             Observable.create(object : ObservableOnSubscribe<View>, View.OnClickListener {
-                lateinit var emitter: ObservableEmitter<View>
-                override fun onClick(v: View) {
-                    emitter.onNext(v)
-                }
+                    lateinit var emitter: ObservableEmitter<View>
+                    override fun onClick(v: View) {
+                        emitter.onNext(v)
+                    }
 
-                override fun subscribe(emitter: ObservableEmitter<View>) {
-                    this.emitter = emitter
-                    ids.forEach { id ->
-                        if (id != 0) {
-                            it.findViewById<View>(id).setOnClickListener(this)
+                    override fun subscribe(emitter: ObservableEmitter<View>) {
+                        this.emitter = emitter
+                        ids.forEach { id ->
+                            if (id != 0) {
+                                it.findViewById<View>(id).setOnClickListener(this)
+                            }
                         }
                     }
-                }
-            }).compose(bindUntilEvent(FragmentEvent.DESTROY))
-                    .throttleFirst(500, TimeUnit.MILLISECONDS)
-                    .subscribe({ onClick(it) })
+                }).compose(bindUntilEvent(FragmentEvent.DESTROY))
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .subscribe({ onClick(it) })
         }
     }
 

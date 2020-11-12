@@ -1,10 +1,9 @@
 package com.common.widget.banner.adapter;
 
 
+import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.common.widget.R;
 import com.common.widget.banner.holder.CBViewHolderCreator;
@@ -18,6 +17,7 @@ import java.util.List;
  * Created by Sai on 15/7/29.
  */
 public class CBPageAdapter<T> extends PagerAdapter {
+
     protected List<T> mDatas;
     protected CBViewHolderCreator holderCreator;
     //    private View.OnClickListener onItemClickListener;

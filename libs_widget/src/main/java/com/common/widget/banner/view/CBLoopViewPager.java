@@ -1,11 +1,10 @@
 package com.common.widget.banner.view;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.common.widget.banner.adapter.CBPageAdapter;
 import com.common.widget.banner.listener.OnItemClickListener;

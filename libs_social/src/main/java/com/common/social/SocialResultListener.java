@@ -10,6 +10,7 @@ import java.util.Map;
 public interface SocialResultListener {
     /* 开始调用的时候 */
     void onStart(SHARE_MEDIA share_media);
+
     /* 完成的时候回调 */
     void onComplete(SHARE_MEDIA platform, Map<String, String> data);
 }

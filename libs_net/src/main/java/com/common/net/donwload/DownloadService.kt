@@ -1,9 +1,9 @@
-package com.ssf.framework.net.donwload
+package com.common.net.donwload
 
 import android.content.Context
-import com.ssf.framework.net.donwload.cache.DownInfoDbUtil
-import com.ssf.framework.net.donwload.interfac.DownState
-import com.xm.xlog.KLog
+import com.common.log.KLog
+import com.common.net.donwload.cache.DownInfoDbUtil
+import com.common.net.donwload.interfac.DownState
 
 /**
  * @author: ydm
@@ -16,9 +16,15 @@ class DownloadService {
         /**
          * 下载更新数据库
          */
-        fun update(context: Context,downloadUrl: String, readCount: Long, totalCount: Long, done: Boolean) {
+        fun update(
+            context: Context,
+            downloadUrl: String,
+            readCount: Long,
+            totalCount: Long,
+            done: Boolean
+        ) {
             val downInfo = DownInfoDbUtil.getInstance(context).query(downloadUrl)
-            if (downInfo != null && downInfo.state != DownState.PAUSE){
+            if (downInfo != null && downInfo.state != DownState.PAUSE) {
                 // 之前的进度，避免重复刷新
                 val preProgress = (downInfo.readLength * 1.0 / downInfo.countLength * 100.0).toInt()
                 // 写入当前读入的值
@@ -31,11 +37,11 @@ class DownloadService {
                 downInfo.readLength = readLength
                 // 计算进度
                 val progress = downInfo.progress
-                if (done){
+                if (done) {
                     KLog.e("完成了....")
                 }
                 // 完成
-                if (progress != preProgress){
+                if (progress != preProgress) {
                     // 刷新数据库
                     DownInfoDbUtil.getInstance(context).update(downInfo)
 

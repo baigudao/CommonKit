@@ -15,10 +15,12 @@ import android.widget.RelativeLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.common.autolayout.utils.AutoUtils;
 import com.common.widget.R;
 import com.common.widget.banner.adapter.CBPageAdapter;
 import com.common.widget.banner.holder.CBViewHolderCreator;
 import com.common.widget.banner.listener.CBPageChangeListener;
+import com.common.widget.banner.listener.OnItemClickListener;
 import com.common.widget.banner.view.CBLoopViewPager;
 
 import java.lang.ref.WeakReference;
@@ -254,7 +256,7 @@ public class ConvenientBanner<T> extends LinearLayout {
      * @param transformer
      * @return
      */
-    public ConvenientBanner setPageTransformer(PageTransformer transformer) {
+    public ConvenientBanner setPageTransformer(ViewPager.PageTransformer transformer) {
         viewPager.setPageTransformer(true, transformer);
         return this;
     }

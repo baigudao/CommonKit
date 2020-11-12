@@ -1,9 +1,9 @@
 package com.common.autolayout
 
 import android.content.Context
+import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.common.autolayout.utils.AutoLayoutHelper
 
 /**

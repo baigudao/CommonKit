@@ -1,4 +1,4 @@
-package com.ssf.framework.widget.state
+package com.common.widget.state
 
 /**
  * @author 小民

@@ -1,4 +1,4 @@
-package com.ssf.framework.net.common
+package com.common.net.common
 
 /**
  * @author yedanmin

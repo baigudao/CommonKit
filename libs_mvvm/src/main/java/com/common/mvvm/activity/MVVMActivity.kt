@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.common.mvvm.vm.SuperViewModelProvider
+import com.ssf.framework.main.activity.BaseActivity
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -18,21 +19,28 @@ import javax.inject.Inject
  * @describe
  */
 abstract class MVVMActivity<T : ViewDataBinding>(
-        // 自定义布局
-        private val layoutResID: Int,
-        //需要设置点击事件的ViewId
-        vararg ids: Int,
-        // 是否可以滑动退出，默认true
-        swipeBackLayoutEnable: Boolean = true,
-        // StatusBar颜色
-        statusBarColor: Int = 0,
-        // StatusBar 透明度 (0 - 255)
-        statusBarAlpha: Int = 0
-) : BaseActivity(layoutResID, *ids, swipeBackLayoutEnable = swipeBackLayoutEnable, statusBarColor = statusBarColor, statusBarAlpha = statusBarAlpha),
+    // 自定义布局
+    private val layoutResID: Int,
+    //需要设置点击事件的ViewId
+    vararg ids: Int,
+    // 是否可以滑动退出，默认true
+    swipeBackLayoutEnable: Boolean = true,
+    // StatusBar颜色
+    statusBarColor: Int = 0,
+    // StatusBar 透明度 (0 - 255)
+    statusBarAlpha: Int = 0
+) : BaseActivity(
+    layoutResID,
+    *ids,
+    swipeBackLayoutEnable = swipeBackLayoutEnable,
+    statusBarColor = statusBarColor,
+    statusBarAlpha = statusBarAlpha
+),
     HasSupportFragmentInjector {
 
     // mvvm
     protected lateinit var binding: T
+
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 

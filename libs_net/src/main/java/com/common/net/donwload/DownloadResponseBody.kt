@@ -1,4 +1,4 @@
-package com.ssf.framework.net.donwload
+package com.common.net.donwload
 
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -11,19 +11,19 @@ import java.io.IOException
  * @说明: 下载相应 body
  */
 class DownloadResponseBody(
-        // 下载文件网站
-        private val donwloadUrl:String,
-        // 响应body
-        private val responseBody: ResponseBody,
-        // 回调
-        private val update: (String, Long, Long, Boolean) -> Unit
+    // 下载文件网站
+    private val donwloadUrl: String,
+    // 响应body
+    private val responseBody: ResponseBody,
+    // 回调
+    private val update: (String, Long, Long, Boolean) -> Unit
 ) : ResponseBody() {
 
     private var bufferedSource: BufferedSource? = null
 
-    override fun contentLength(): Long  = responseBody.contentLength()
+    override fun contentLength(): Long = responseBody.contentLength()
 
-    override fun contentType(): MediaType?  = responseBody.contentType()
+    override fun contentType(): MediaType? = responseBody.contentType()
 
     override fun source(): BufferedSource? {
         if (bufferedSource == null) {
@@ -39,6 +39,7 @@ class DownloadResponseBody(
         return object : ForwardingSource(source) {
             /* 当前已经读取的字节数量 */
             private var totalBytesRead = 0L
+
             @Throws(IOException::class)
             override fun read(sink: Buffer, byteCount: Long): Long {
                 val bytesRead = super.read(sink, byteCount)

@@ -1,6 +1,6 @@
 package com.common.mvvm.livedata
 
-import com.ssf.framework.main.mvvm.livedata.event.EventLiveData
+import com.common.mvvm.livedata.event.EventLiveData
 
 /**
  * Created by hzz on 2018/8/18.

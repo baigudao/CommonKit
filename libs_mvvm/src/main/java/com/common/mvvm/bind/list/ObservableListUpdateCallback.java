@@ -1,8 +1,9 @@
 package com.common.mvvm.bind.list;
 
-import android.databinding.ObservableList;
 
-import com.ssf.framework.main.mvvm.adapter.BaseBindingAdapter;
+import androidx.databinding.ObservableList;
+
+import com.common.mvvm.adapter.BaseBindingAdapter;
 
 import java.util.List;
 

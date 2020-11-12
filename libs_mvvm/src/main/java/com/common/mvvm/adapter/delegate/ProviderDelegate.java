@@ -2,8 +2,6 @@ package com.common.mvvm.adapter.delegate;
 
 import android.util.SparseArray;
 
-import com.ssf.framework.main.mvvm.adapter.delegate.BaseItemProvider;
-
 
 /**
  * 布局处理提供者委托，用来装配布局处理提供者

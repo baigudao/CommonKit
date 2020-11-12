@@ -1,10 +1,12 @@
 package com.common.mvvm.bind;
 
-import android.databinding.BindingAdapter;
+
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ssf.framework.autolayout.utils.AutoUtils;
+import androidx.databinding.BindingAdapter;
+
+import com.common.autolayout.utils.AutoUtils;
 
 public class ViewAttrBind {
 
