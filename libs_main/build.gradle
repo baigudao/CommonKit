@@ -56,7 +56,7 @@ dependencies {
     implementation lib.ConstraintLayout
 
     implementation project(':libs_widget')
-    implementation project(':libs_util')
+    api project(':libs_util')
     implementation project(':libs_umeng')
     implementation project(':libs_tinker')
     implementation project(':libs_refreshlayout')
