@@ -9,8 +9,17 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/libs_autolayout" />
+            <option value="$PROJECT_DIR$/libs_glide" />
+            <option value="$PROJECT_DIR$/libs_log" />
             <option value="$PROJECT_DIR$/libs_main" />
+            <option value="$PROJECT_DIR$/libs_mvvm" />
+            <option value="$PROJECT_DIR$/libs_net" />
+            <option value="$PROJECT_DIR$/libs_social" />
+            <option value="$PROJECT_DIR$/libs_tinker" />
+            <option value="$PROJECT_DIR$/libs_umeng" />
             <option value="$PROJECT_DIR$/libs_util" />
+            <option value="$PROJECT_DIR$/libs_widget" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

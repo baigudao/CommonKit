@@ -1,2 +1,3 @@
-include ':app', ':libs_main', ':libs_util'
+include ':app'
+include ':libs_main', ':libs_util', ':libs_log', ':libs_glide', ':libs_autolayout', ':libs_mvvm', ':libs_net', ':libs_social', ':libs_tinker', ':libs_widget', ':libs_umeng'
 rootProject.name='CommonKit'
